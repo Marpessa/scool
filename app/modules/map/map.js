@@ -28,10 +28,6 @@ define( [
   Map.onStart = function(options) {},
   Map.onStop = function(options) {},
 
-  Map.getViewItem = function() {
-    return Map.ControllerItem.ViewItem;
-  },
-
   Map.renderView = function(options) {
     Map.ControllerItem.onRenderView();
   },

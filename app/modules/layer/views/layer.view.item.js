@@ -5,20 +5,12 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-  	//className: 'layer',
-    //tagName: 'div',
     object: "",
 
     attributes : function() {
-        /*return {
-          'style': "top: " + this.model.get( 'positionZ' ) * 33 + "px"
-        };*/
     },
 
   	initialize: function(options) {
-	    /*this.template = _.template(
-        '<div>Z : <%= positionZ %></div>'
-      );*/
       this.object = new createjs.Shape();
 	  },
 
@@ -27,7 +19,11 @@ define( [ "app" ], function( App ) {
       this.object.y = this.model.get( 'positionZ' ) * 33;
 
       App.stage.addChild(this.object);
-	  }
+	  },
+
+    getObject: function() {
+      return this.object;
+    }
 
   });
 

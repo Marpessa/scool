@@ -34,10 +34,6 @@ define( [
   Layer.onStart = function(options) {},
   Layer.onStop = function(options) {},
 
-  Layer.getViewCollection = function() {
-    return Layer.ControllerItem.ViewCollection;
-  },
-
   Layer.on("before:start", function() {
       
   });

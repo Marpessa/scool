@@ -5,19 +5,10 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-  	//className: 'tile',
-    ///tagName: 'div',
-
     attributes : function() {
-        /*return {
-          'style': "left: " + this.model.get( 'positionX' ) + "px; top: " + this.model.get( 'positionY' ) + "px;"
-        };*/
     },
 
   	initialize: function () {
-      /*this.template = _.template(
-        '<div>X:<%= positionX %> Y:<%= positionY %></div>'
-      );*/
     },
 
 	  render: function () {

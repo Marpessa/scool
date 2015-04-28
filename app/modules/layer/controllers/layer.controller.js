@@ -12,9 +12,8 @@ define( [ "app" ], function( App ) {
 			var Collection = new options.Collection();
 
 	    var MapModule = options.Modules.MapModule;
-	  	var mapModuleViewItem = MapModule.getViewItem();
 
-	    this.ViewCollection = new options.CollectionView({ Collection: Collection, ParentView: mapModuleViewItem });
+	    this.ViewCollection = new options.CollectionView({ Collection: Collection });
 
 	    var layer1 = new options.Model({positionZ: 2, frameColor: "#ccc"});
 			var layer2 = new options.Model({positionZ: 1, frameColor: "#ddd"});

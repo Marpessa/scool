@@ -7,6 +7,7 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
       return {
+      					layerId: "",
 	              width: 100,
 	              height: 58,
 	              regX: 100/2,
