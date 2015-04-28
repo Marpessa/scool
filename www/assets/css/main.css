@@ -1,0 +1,40 @@
+#map {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #fefefe;
+}
+
+#map .layer {
+  position: absolute;
+  top:0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background-color: #aaa;
+  border: 1px solid #000;
+
+  opacity: 0.8;
+}
+
+#map .layer { text-align: right; }
+
+#map .layer + .layer { background-color: #ccc; }
+#map .layer + .layer + .layer { background-color: #eee; }
+
+#map .layer .tile
+{
+  position: absolute;
+  width: 64px;
+  height: 64px; 
+  border: 1px solid #ddd;
+  background-color: #000;
+}
+
+#map .layer + .layer .tile {
+  background-color: rgb(165, 98, 42);
+}
+
+ #map .layer + .layer + .layer .tile {
+  background-color: green;
+}
