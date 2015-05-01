@@ -22,16 +22,21 @@ define( [ "app" ], function( App ) {
 
 	  onRenderView: function( _layerController )
 	  {
-      var _layerCollection = _layerController.ViewCollection.collection.models;
-      var width = 100/2;
-      var height = 58/2;
+      var _layerCollectionChildren = _layerController.ViewCollection.children;
+      
+      var _width = 100/2;
+      var _height = 58/2;
 
       var i, j, z = 0;
-      for(z in _layerCollection) {
-        for (i = 0; i < 10; i++) {
-          for (j = 0; j < 10; j++) {
+      var _layerCollectionChildrenLength = _layerCollectionChildren.length;
 
-            var tile = new this.options.Model({positionX: (j-i) * width, positionY: (i+j) * height, layerId: _layerCollection[z].cid});
+      for(z=0; z < _layerCollectionChildrenLength; z++) {
+        var _layerChild = _layerCollectionChildren.findByIndex(z);
+        var _nbTiles = _layerChild.model.get('nbTiles')
+
+        for (i = 0; i < _nbTiles; i++) {
+          for (j = 0; j < _nbTiles; j++) {
+            var tile = new this.options.Model({'posX': (j-i) * _width, 'posY': (i+j) * _height, 'layerObject': _layerChild.getObject()});
             this.ViewCollection.collection.add(tile);
           }
         }

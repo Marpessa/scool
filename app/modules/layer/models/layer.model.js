@@ -9,8 +9,10 @@ define( [ "app" ], function( App ) {
     	return {
 		            width: 640,
 		            height: 480,
-		            positionZ : 0,
-		            nbTiles : 24, // Tiles number displaying on each layer
+		            posX : 0,
+		            posY: 0,
+		            posZ : 0,
+		            nbTiles : 10, // Tiles number displaying on each layer
 		            frameColor: "#ccc"
          		 }
   	},

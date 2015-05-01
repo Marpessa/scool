@@ -12,14 +12,18 @@ define( [ "app" ], function( App ) {
     },
 
 	  render: function () {
-	  	sprite = App.queue.getResult("tile");
+	  	var _sprite = App.queue.getResult("tile");
 
-      var sprite = new createjs.Bitmap(sprite);
-      sprite.x = this.model.get( 'positionX' ) + 1200/2;
-      sprite.y = this.model.get( 'positionY' );
-      sprite.regX = this.model.get( 'regX' );
-      sprite.regY = this.model.get( 'regY' );
-      App.stage.addChild(sprite);
+      _sprite = new createjs.Bitmap(_sprite);
+      _sprite.x = this.model.get( 'posX' ) + 1200/2;
+      _sprite.y = this.model.get( 'posY' );
+      _sprite.regX = this.model.get( 'regX' );
+      _sprite.regY = this.model.get( 'regY' );
+
+
+      var _layerObject = this.model.get('layerObject');
+      //console.log( _layerObject );
+      _layerObject.stage.addChild(_sprite);
 	  }
 
   });

@@ -15,8 +15,8 @@ define( [ "app" ], function( App ) {
 	  },
 
 	  render: function () {
-	  	this.object.graphics.beginFill( this.model.attributes.frameColor ).drawRect(0, 0, 500, 500);
-      this.object.y = this.model.get( 'positionZ' ) * 33;
+	  	this.object.graphics.beginFill( this.model.get('frameColor') ).drawRect(this.model.get('posX'), this.model.get('posY'), this.model.get('width'), this.model.get('height'));
+      this.object.y = this.model.get( 'posZ' );
 
       App.stage.addChild(this.object);
 	  },
