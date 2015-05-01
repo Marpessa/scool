@@ -15,9 +15,9 @@ define( [ "app" ], function( App ) {
 
 	    this.ViewCollection = new options.CollectionView({ Collection: Collection });
 
-	    var layer1 = new options.Model({'posZ': 2 * 33, 'frameColor': "#ccc"});
-			var layer2 = new options.Model({'posZ': 1 * 33, 'frameColor': "#ddd"});
-			var layer3 = new options.Model({'posZ': 0 * 33, 'frameColor': "#eee"});
+	    var layer1 = new options.Model({'posZ': 2 * 58, 'frameColor': "#ccc"});
+			var layer2 = new options.Model({'posZ': 1 * 58, 'frameColor': "#ddd"});
+			var layer3 = new options.Model({'posZ': 0 * 58, 'frameColor': "#eee"});
 			this.ViewCollection.collection.add(layer1);
 			this.ViewCollection.collection.add(layer2);
 			this.ViewCollection.collection.add(layer3);

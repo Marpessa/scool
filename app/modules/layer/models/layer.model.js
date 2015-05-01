@@ -7,7 +7,7 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
     	return {
-		            width: 640,
+		            width: 1200,
 		            height: 480,
 		            posX : 0,
 		            posY: 0,

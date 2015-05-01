@@ -22,8 +22,7 @@ define( [ "app" ], function( App ) {
 
 
       var _layerObject = this.model.get('layerObject');
-      //console.log( _layerObject );
-      _layerObject.stage.addChild(_sprite);
+      _layerObject.addChild(_sprite);
 	  }
 
   });
