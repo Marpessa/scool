@@ -18,6 +18,7 @@ define( [
 
     this.stage = new createjs.Stage( "cMap" );
 
+    this.options.LoaderModule.start();
     this.options.MapModule.start();
     this.options.LayerModule.start();
     this.options.TileModule.start();
@@ -30,16 +31,15 @@ define( [
       {id: "tile", src:"/assets/imgs/tile1.png"}
     ]);
 
-    // http://www.gamedev5.com/2013/06/tutorial-2-dragon-of-bosnia-preloading.html
-    // https://github.com/eschwartz/CanvasRPG/blob/master/Game/Game.js
-
     function handleProgress(_this) {
       console.info( "Loading..." );
+      App.options.LoaderModule.renderView();
       App.stage.update();
     }
 
     function handleComplete(_this) {
       console.info( "Load Complete" );
+      App.options.LoaderModule.stop();
       App.options.MapModule.renderView();
       App.stage.update();
     }

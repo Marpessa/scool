@@ -53,14 +53,16 @@ require([
   'app',
 
   // Modules
+  'modules/loader/loader',
   'modules/map/map',
   'modules/layer/layer',
   'modules/tile/tile'
-], function(App, MapModule, LayerModule, TileModule) {
+], function(App, LoaderModule, MapModule, LayerModule, TileModule) {
 
   'use strict';
 
   var options = {
+    LoaderModule: LoaderModule,
     MapModule: MapModule,
     LayerModule: LayerModule,
     TileModule: TileModule

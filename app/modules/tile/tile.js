@@ -31,6 +31,10 @@ define( [
                                             });
   });
 
+  // Methods
+  Tile.onStart = function(options) {},
+  Tile.onStop = function(options) {},
+
   Tile.on("before:start", function() {
       
   });

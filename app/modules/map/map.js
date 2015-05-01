@@ -19,8 +19,9 @@ define( [
 
   Map.addInitializer(function() {
     Map.ControllerItem = new Map.Controller({ 
-                                              Model: Map.Model,
-                                              ItemView: Map.ItemView
+                                              'Modules': {},
+                                              'Model': Map.Model,
+                                              'ItemView': Map.ItemView
                                             });
   });
 

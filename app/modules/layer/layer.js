@@ -20,13 +20,14 @@ define( [
   Layer.Controller = Controller.extend({});
 
   Layer.addInitializer(function() {
+    
     // Get Other modules
     var MapModule = App.module('Map');
     
-    Layer.ControllerItem = new Layer.Controller({ Model: Layer.Model,
-                                                  Collection: Layer.Collection,
-                                                  CollectionView: Layer.CollectionView,
-                                                  Modules: { MapModule: MapModule }
+    Layer.ControllerItem = new Layer.Controller({ 'Model': Layer.Model,
+                                                  'Collection': Layer.Collection,
+                                                  'CollectionView': Layer.CollectionView,
+                                                  'Modules': { 'MapModule': MapModule }
                                                 });
   });
 

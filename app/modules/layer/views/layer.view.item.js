@@ -5,13 +5,13 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-    object: "",
+    content: "",
 
     attributes : function() {
     },
 
   	initialize: function(options) {
-      this.object = new createjs.Container();
+      this.content = new createjs.Container();
 	  },
 
 	  render: function () {
@@ -19,13 +19,14 @@ define( [ "app" ], function( App ) {
       _shape.graphics.beginFill( this.model.get('frameColor') ).drawRect(this.model.get('posX'), this.model.get('posY'), this.model.get('width'), this.model.get('height'));
       this.object.addChild(_shape);*/
 
-      this.object.y = this.model.get( 'posZ' );
+      this.content.x = this.model.get( 'posX' );
+      this.content.y = this.model.get( 'posY' ) + this.model.get( 'posZ' );
 
-      App.stage.addChild(this.object);
+      App.stage.addChild(this.content);
 	  },
 
-    getObject: function() {
-      return this.object;
+    getContent: function() {
+      return this.content;
     }
 
   });

@@ -24,19 +24,23 @@ define( [ "app" ], function( App ) {
 	  {
       var _layerCollectionChildren = _layerController.ViewCollection.children;
       
-      var _width = 100/2;
-      var _height = 58/2;
-
       var i, j, z = 0;
       var _layerCollectionChildrenLength = _layerCollectionChildren.length;
 
-      for(z=0; z < _layerCollectionChildrenLength; z++) {
+      for(z = 0; z < _layerCollectionChildrenLength; z++) {
         var _layerChild = _layerCollectionChildren.findByIndex(z);
         var _nbTiles = _layerChild.model.get('nbTiles')
 
         for (i = 0; i < _nbTiles; i++) {
           for (j = 0; j < _nbTiles; j++) {
-            var tile = new this.options.Model({'posX': (j-i) * _width, 'posY': (i+j) * _height, 'layerObject': _layerChild.getObject()});
+
+            var _posX = (j-i) * _layerChild.model.get('tileWidth')/2;
+            var _posY = (i+j) * _layerChild.model.get('tileHeight')/2;
+
+            var tile = new this.options.Model({'posX': _posX,
+                                               'posY': _posY,
+                                               'layerContent': _layerChild.getContent()
+                                              });
             this.ViewCollection.collection.add(tile);
           }
         }

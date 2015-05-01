@@ -1,4 +1,4 @@
-// map.controller.js
+// loader.controller.js
 define( [ "app" ], function( App ) {
 
 	'use strict';
@@ -17,6 +17,11 @@ define( [ "app" ], function( App ) {
 	  	this.ViewItem.render();
 
 	  	this.triggerMethod('onRenderView');
+	  },
+
+	  onReset: function()
+	  {
+	  	this.ViewItem.reset();
 	  }
 
   });
