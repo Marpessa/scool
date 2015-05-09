@@ -14,7 +14,6 @@ define( [
   Layer.startWithParent = false;
 
   // On spécifie nos API
-  Layer.Model = Model.extend({});
   Layer.Collection = Collection.extend({});
   Layer.CollectionView = CollectionView.extend({});
   Layer.Controller = Controller.extend({});
@@ -24,8 +23,7 @@ define( [
     // Get Other modules
     var MapModule = App.module('Map');
     
-    Layer.ControllerItem = new Layer.Controller({ 'Model': Layer.Model,
-                                                  'Collection': Layer.Collection,
+    Layer.ControllerItem = new Layer.Controller({ 'Collection': Layer.Collection,
                                                   'CollectionView': Layer.CollectionView,
                                                   'Modules': { 'MapModule': MapModule }
                                                 });

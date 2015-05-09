@@ -29,7 +29,7 @@ define( [ "app" ], function( App ) {
 
       for(z = 0; z < _layerCollectionChildrenLength; z++) {
         var _layerChild = _layerCollectionChildren.findByIndex(z);
-        var _nbTiles = _layerChild.model.get('nbTiles')
+        var _nbTiles = _layerChild.model.get('nbTiles');
 
         for (i = 0; i < _nbTiles; i++) {
           for (j = 0; j < _nbTiles; j++) {

@@ -1,4 +1,4 @@
-// map.model.js
+// layer.model.js
 define( [ "app" ], function( App ) {
 
 	'use strict';
@@ -16,8 +16,8 @@ define( [ "app" ], function( App ) {
 		            posY: 0,
 		            posZ : 0,
 		            nbTiles : 10, // Tiles number displaying on each layer
-		            tiles: [],
-		            frameColor: "#ccc"
+		            grid: [],
+		            frameColor: "#ccc",
          		 }
   	},
 

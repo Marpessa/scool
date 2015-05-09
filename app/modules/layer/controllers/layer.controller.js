@@ -9,18 +9,22 @@ define( [ "app" ], function( App ) {
 
 		initialize: function(options) {
 
+	    var MapModule = options.Modules.MapModule;
 			var Collection = new options.Collection();
 
-	    var MapModule = options.Modules.MapModule;
+	    Collection.fetch({
+	    	dataType: 'json',
+	    	success: function(collection, response, options) {
+        	console.info("JSON file load was successful");
+		    },
+
+		    error: function(collection, response, options){
+		      console.error('There was some error in loading and processing the JSON file' );
+		    }
+	    });
 
 	    this.ViewCollection = new options.CollectionView({ Collection: Collection });
 
-	    var layer1 = new options.Model({'index': 2, 'frameColor': "#ccc"});
-			var layer2 = new options.Model({'index': 1, 'frameColor': "#ddd"});
-			var layer3 = new options.Model({'index': 0, 'frameColor': "#eee"});
-			this.ViewCollection.collection.add(layer1);
-			this.ViewCollection.collection.add(layer2);
-			this.ViewCollection.collection.add(layer3);
 
 	    this.listenTo(MapModule.ControllerItem, 'onRenderView', this.onRenderView);
 	  },
