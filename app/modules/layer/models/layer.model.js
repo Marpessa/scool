@@ -15,16 +15,16 @@ define( [ "app" ], function( App ) {
 		            posX : 0,
 		            posY: 0,
 		            posZ : 0,
-		            nbTiles : 10, // Tiles number displaying on each layer
+		            nbTilesByRow : 10, // Tiles number displaying on each layer
 		            grid: [],
 		            frameColor: "#ccc",
          		 }
   	},
 
 		initialize: function(options) {
-			this.attributes.posX = this.attributes.width/2;
-			this.attributes.posY = 0;
-			this.attributes.posZ = options.index * this.attributes.tileHeight;
+			this.set('posX', this.get('width')/2);
+			this.set('posY', 0);
+			this.set('posZ', options.index * this.get('tileHeight'));
 		}
 
   });

@@ -28,7 +28,8 @@ define( [
     this.queue.on("progress", handleProgress, this);
 
     this.queue.loadManifest([
-      {id: "tile", src:"/assets/imgs/tile1.png"}
+      {id: "tile0", src:"/assets/imgs/tile0.png"},
+      {id: "tile1", src:"/assets/imgs/tile1.png"}
     ]);
 
     function handleProgress(_this) {
@@ -59,6 +60,7 @@ define( [
         currentModule.stop();
     }
     currentModule = module;
+
   });
 
   return App;

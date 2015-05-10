@@ -8,8 +8,12 @@ define( [ "app" ], function( App ) {
   	defaults : function() {
       return {
       					layerContent: "",
-	              posX : 0,
+                imgId: "tile0",
+                x: 0,
+                y: 0,
+                posX: 0,
 	              posY: 0,
+                alpha: 1,
 	              walkable: false
             }
     },
@@ -17,7 +21,7 @@ define( [ "app" ], function( App ) {
 		initialize: function(options) {
 			if( options.walkable === false )
       {
-        this.attributes.walkable = false;
+        this.set('walkable', false);
       }
 		}
 

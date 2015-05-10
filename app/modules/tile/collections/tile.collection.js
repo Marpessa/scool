@@ -9,10 +9,15 @@ define( [
   return Backbone.Collection.extend({
 
   	model: Model,
+  	layerIndex: 0,
 
   	url: function () {
-      return "http://dev.scool.com/rest/map_0_0/layer_0_tiles.json";
-    }
+      return "http://dev.scool.com/rest/map_0_0/layer_" + this.layerIndex + "_tiles.json";
+    },
+
+  	setLayerIndex: function(layerIndex) {
+  		this.layerIndex = layerIndex;
+  	}
 
   });
 
