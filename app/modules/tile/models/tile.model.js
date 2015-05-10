@@ -8,12 +8,13 @@ define( [ "app" ], function( App ) {
   	defaults : function() {
       return {
       					layerContent: "",
-                imgId: "tile0",
+                imgId: "",
                 x: 0,
                 y: 0,
                 posX: 0,
 	              posY: 0,
                 alpha: 1,
+                visible: true,
 	              walkable: false
             }
     },

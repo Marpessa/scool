@@ -24,7 +24,7 @@ define( [ "app" ], function( App ) {
 		initialize: function(options) {
 			this.set('posX', this.get('width')/2);
 			this.set('posY', 0);
-			this.set('posZ', options.index * this.get('tileHeight'));
+			this.set('posZ', - ( options.index * this.get('tileHeight') ) );
 		}
 
   });

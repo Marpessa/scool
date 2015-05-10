@@ -10,8 +10,10 @@ define( [
   'use strict';
 
   var App = new Backbone.Marionette.Application();
+  App.version = "0.1";
 
   var currentModule;
+
 
   App.addInitializer(function (options) {
     this.options = options;
@@ -29,7 +31,8 @@ define( [
 
     this.queue.loadManifest([
       {id: "tile0", src:"/assets/imgs/tile0.png"},
-      {id: "tile1", src:"/assets/imgs/tile1.png"}
+      {id: "tile1", src:"/assets/imgs/tile1.png"},
+      {id: "tile2", src:"/assets/imgs/tile2.png"}
     ]);
 
     function handleProgress(_this) {

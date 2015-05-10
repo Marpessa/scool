@@ -12,7 +12,7 @@ define( [
   	layerIndex: 0,
 
   	url: function () {
-      return "http://dev.scool.com/rest/map_0_0/layer_" + this.layerIndex + "_tiles.json";
+      return "http://dev.scool.com/rest/map_0_0/layer_" + this.layerIndex + "_tiles.json?v=" + App.version;
     },
 
   	setLayerIndex: function(layerIndex) {
