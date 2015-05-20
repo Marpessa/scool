@@ -15,10 +15,6 @@ define( [ "app" ], function( App ) {
 	  },
 
 	  render: function () {
-      /*var _shape = new createjs.Shape();
-      _shape.graphics.beginFill( this.model.get('frameColor') ).drawRect(this.model.get('posX'), this.model.get('posY'), this.model.get('width'), this.model.get('height'));
-      this.content.addChild(_shape);*/
-
       this.content.x = this.model.get( 'posX' );
       this.content.y = this.model.get( 'posY' ) + this.model.get( 'posZ' );
 

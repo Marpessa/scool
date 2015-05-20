@@ -12,9 +12,11 @@ define( [ "app" ], function( App ) {
     },
 
 	  render: function () {
-	  	var _sprite = App.queue.getResult( this.model.get( 'imgId' ) );
+      var _spriteSheet = this.model.get('mapSpriteSheet');
 
-      _sprite = new createjs.Bitmap(_sprite);
+      var _sprite = new createjs.Sprite(_spriteSheet );
+      _sprite.gotoAndStop( this.model.get('frameId') );
+
       _sprite.x = this.model.get( 'posX' );
       _sprite.y = this.model.get( 'posY' );
       _sprite.alpha = this.model.get( 'alpha' );

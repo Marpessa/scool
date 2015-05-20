@@ -8,9 +8,12 @@ define( [ "app" ], function( App ) {
   	defaults : function() {
       return {
       					layerContent: "",
-                imgId: "",
-                x: 0,
-                y: 0,
+                mapSpriteSheet: "",
+                frameId: 0,
+                width: 0,
+                height: 0,
+                indexX: 0,
+                indexY: 0,
                 posX: 0,
 	              posY: 0,
                 alpha: 1,
@@ -24,6 +27,13 @@ define( [ "app" ], function( App ) {
       {
         this.set('walkable', false);
       }
+
+      if( options.visible === false )
+      {
+        this.set('visible', false);
+      }
+
+      this.frameId = 'frame_' + this.frameId;
 		}
 
   });

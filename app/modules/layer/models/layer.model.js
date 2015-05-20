@@ -11,13 +11,11 @@ define( [ "app" ], function( App ) {
 		            width: 1200,
 		            height: 480,
 		            tileWidth: 100,
-		            tileHeight: 58,
+		            tileHeight: 50,
 		            posX : 0,
 		            posY: 0,
 		            posZ : 0,
-		            nbTilesByRow : 10, // Tiles number displaying on each layer
-		            grid: [],
-		            frameColor: "#ccc",
+		            nbTilesByRow : 10 // Tiles number displaying on each layer
          		 }
   	},
 

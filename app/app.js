@@ -29,11 +29,11 @@ define( [
     this.queue.on("complete", handleComplete, this);
     this.queue.on("progress", handleProgress, this);
 
-    this.queue.loadManifest([
-      {id: "tile0", src:"/assets/imgs/tile0.png"},
-      {id: "tile1", src:"/assets/imgs/tile1.png"},
-      {id: "tile2", src:"/assets/imgs/tile2.png"}
-    ]);
+    var _manifest = [
+      {id: "tile3", src:"sprite0.png"}
+    ];
+
+    this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
     function handleProgress(_this) {
       console.info( "Loading..." );
@@ -44,7 +44,8 @@ define( [
     function handleComplete(_this) {
       console.info( "Load Complete" );
       App.options.LoaderModule.stop();
-      App.options.MapModule.renderView();
+
+      App.triggerMethod('onHandleComplete');
       App.stage.update();
     }
   });

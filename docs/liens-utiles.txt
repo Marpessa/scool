@@ -1,0 +1,3 @@
+http://www.dhumez-sebastien.com/2014/11/26/ayolan-editor-un-editeur-de-jeu-multi-utilisateurs-realise-en-html5javascript/
+
+http://www.mapeditor.org/

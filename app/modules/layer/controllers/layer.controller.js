@@ -15,7 +15,7 @@ define( [ "app" ], function( App ) {
 	    this.listenTo(MapModule.ControllerItem, 'onRenderView', this.onRenderView);
 	  },
 
-	  onRenderView: function()
+	  onRenderView: function(_mapController)
 	  {
 			var Collection = new this.options.Collection();
 
