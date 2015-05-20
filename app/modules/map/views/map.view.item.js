@@ -23,7 +23,7 @@ define( [
 
 	  	// Load Sprites
 	  	var _data = {
-        images: [App.queue.getResult( "tile3" )],
+        images: [App.queue.getResult( "map_0_0" )],
         frames: [
           // x, y, width, height, imageIndex*, regX*, regY*
           [100, 0, 100, 100],

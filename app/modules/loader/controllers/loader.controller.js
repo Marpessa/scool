@@ -10,6 +10,8 @@ define( [ "app" ], function( App ) {
 		initialize: function(options) {
 	    var ModelItem = new options.Model();
 	    this.ViewItem = new options.ItemView({ model: ModelItem });
+
+	    this.listenTo(App, 'onHandleProgress', this.onRenderView);
 	  },
 
 	  onRenderView: function()

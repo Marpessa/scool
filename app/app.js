@@ -30,14 +30,15 @@ define( [
     this.queue.on("progress", handleProgress, this);
 
     var _manifest = [
-      {id: "tile3", src:"sprite0.png"}
+      {id: "map_0_0", src:"sprite0.png"}
     ];
 
     this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
     function handleProgress(_this) {
       console.info( "Loading..." );
-      App.options.LoaderModule.renderView();
+      
+      App.triggerMethod('onHandleProgress');
       App.stage.update();
     }
 

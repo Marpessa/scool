@@ -1,3 +1,7 @@
+https://github.com/qiao/PathFinding.js
+https://github.com/imor/pathfinding-bower/releases
+https://melkybee.wordpress.com/2013/03/28/pathfinding-in-isometric-view/
+
 http://www.dhumez-sebastien.com/2014/11/26/ayolan-editor-un-editeur-de-jeu-multi-utilisateurs-realise-en-html5javascript/
 
 http://www.mapeditor.org/
