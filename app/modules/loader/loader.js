@@ -19,8 +19,8 @@ define( [
 
   Loader.addInitializer(function() {
     Loader.ControllerItem = new Loader.Controller({
-                                                    Model: Loader.Model,
-                                                    ItemView: Loader.ItemView
+                                                    'Model': Loader.Model,
+                                                    'ItemView': Loader.ItemView
                                                   });
   });
 

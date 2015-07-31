@@ -24,6 +24,7 @@ define( [
     this.options.MapModule.start();
     this.options.LayerModule.start();
     this.options.TileModule.start();
+    this.options.PlayerModule.start();
 
     this.queue = new createjs.LoadQueue();
     this.queue.on("complete", handleComplete, this);

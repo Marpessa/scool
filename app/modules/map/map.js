@@ -42,7 +42,5 @@ define( [
     console.info( "Map > start" );
   });
 
-
-
   return Map;
 });

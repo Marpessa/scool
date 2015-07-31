@@ -20,15 +20,15 @@ define( [
   Tile.Controller = Controller.extend({});
 
   Tile.addInitializer(function() {
-   // Get Other modules
-  var MapModule = App.module('Map');
-  var LayerModule = App.module('Layer');
-   
-  Tile.ControllerItem = new Tile.Controller({ Model: Tile.Model,
-                                              Collection: Tile.Collection,
-                                              CollectionView: Tile.CollectionView,
-                                              Modules: { MapModule : MapModule, LayerModule: LayerModule }
-                                            });
+    // Get Other modules
+    var MapModule = App.module('Map');
+    var LayerModule = App.module('Layer');
+     
+    Tile.ControllerItem = new Tile.Controller({ 'Model': Tile.Model,
+                                                'Collection': Tile.Collection,
+                                                'CollectionView': Tile.CollectionView,
+                                                'Modules': { 'MapModule' : MapModule, 'LayerModule': LayerModule }
+                                              });
   });
 
   // Methods

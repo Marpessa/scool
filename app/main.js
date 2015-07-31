@@ -56,8 +56,9 @@ require([
   'modules/loader/loader',
   'modules/map/map',
   'modules/layer/layer',
-  'modules/tile/tile'
-], function(App, LoaderModule, MapModule, LayerModule, TileModule) {
+  'modules/tile/tile',
+  'modules/player/player'
+], function(App, LoaderModule, MapModule, LayerModule, TileModule, PlayerModule) {
 
   'use strict';
 
@@ -65,7 +66,8 @@ require([
     LoaderModule: LoaderModule,
     MapModule: MapModule,
     LayerModule: LayerModule,
-    TileModule: TileModule
+    TileModule: TileModule,
+    PlayerModule: PlayerModule
   };
 
   App.start(options);
