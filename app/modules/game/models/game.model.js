@@ -1,4 +1,4 @@
-// map.model.js
+// game.model.js
 define( [ "app" ], function( App ) {
 
 	'use strict';

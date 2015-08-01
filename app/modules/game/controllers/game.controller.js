@@ -1,4 +1,4 @@
-// map.controller.js
+// game.controller.js
 define( [ "app" ], function( App ) {
 
 	'use strict';

@@ -21,13 +21,13 @@ define( [
 
   Tile.addInitializer(function() {
     // Get Other modules
-    var MapModule = App.module('Map');
+    var GameModule = App.module('Game');
     var LayerModule = App.module('Layer');
      
     Tile.ControllerItem = new Tile.Controller({ 'Model': Tile.Model,
                                                 'Collection': Tile.Collection,
                                                 'CollectionView': Tile.CollectionView,
-                                                'Modules': { 'MapModule' : MapModule, 'LayerModule': LayerModule }
+                                                'Modules': { 'GameModule' : GameModule, 'LayerModule': LayerModule }
                                               });
   });
 

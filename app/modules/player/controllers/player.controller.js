@@ -9,7 +9,7 @@ define( [
   return Backbone.Marionette.Object.extend({
 
   	ViewItem: "",
-    mapPlayerSpriteSheet: "",
+    gamePlayerSpriteSheet: "",
     finder: "",
 
 		initialize: function(options) {
@@ -22,16 +22,16 @@ define( [
 	    var ModelItem = new this.options.Model();
 	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
 
-      var MapModule = this.options.Modules.MapModule;
+      var GameModule = this.options.Modules.GameModule;
       var TileModule = this.options.Modules.TileModule;
 
-	    this.listenTo(MapModule.ControllerItem, 'onRenderView', this.onLoadSpriteSheet); // Always call before Tile listener
+	    this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onLoadSpriteSheet); // Always call before Tile listener
 	    this.listenTo(TileModule.ControllerItem, 'onRenderView', this.onRenderView);
 	  },
 
-	  onLoadSpriteSheet: function(_mapController) {
-	  	this.ViewItem.model.set('mapPlayerSpriteSheet', _mapController.ViewItem.playerSpriteSheet);
-      //this.mapPlayerSpriteSheet = _mapController.ViewItem.playerSpriteSheet;
+	  onLoadSpriteSheet: function(_gameController) {
+	  	this.ViewItem.model.set('gamePlayerSpriteSheet', _gameController.ViewItem.playerSpriteSheet);
+      //this.gamePlayerSpriteSheet = _gameController.ViewItem.playerSpriteSheet;
     },
 
 	  onRenderView: function(_tileController, _collection, _layerChild)

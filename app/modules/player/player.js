@@ -19,14 +19,14 @@ define( [
 
   Player.addInitializer(function() {
     // Get Other modules
-    var MapModule = App.module('Map');
+    var GameModule = App.module('Game');
     var LayerModule = App.module('Layer');
     var TileModule = App.module('Tile');
      
     Player.ControllerItem = new Player.Controller({ 'Modules': {},
                                                     'Model': Player.Model,
                                                     'ItemView': Player.ItemView,
-                                                    'Modules': { 'MapModule' : MapModule, 'TileModule': TileModule }
+                                                    'Modules': { 'GameModule' : GameModule, 'TileModule': TileModule }
                                                   });
   });
 

@@ -21,11 +21,11 @@ define( [
   Layer.addInitializer(function() {
     
     // Get Other modules
-    var MapModule = App.module('Map');
+    var GameModule = App.module('Game');
     
     Layer.ControllerItem = new Layer.Controller({ 'Collection': Layer.Collection,
                                                   'CollectionView': Layer.CollectionView,
-                                                  'Modules': { 'MapModule': MapModule }
+                                                  'Modules': { 'GameModule': GameModule }
                                                 });
   });
 

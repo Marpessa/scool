@@ -17,7 +17,7 @@ define( [
 	  },
 
 	  renderPlayer: function() {
-	  	var _spriteSheet = this.model.get('mapPlayerSpriteSheet');
+	  	var _spriteSheet = this.model.get('gamePlayerSpriteSheet');
 
 	  	var _sprite = new createjs.Sprite(_spriteSheet );
       _sprite.gotoAndStop( this.model.get('frameId') );

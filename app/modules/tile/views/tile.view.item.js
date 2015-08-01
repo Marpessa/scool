@@ -12,7 +12,7 @@ define( [ "app" ], function( App ) {
     },
 
 	  render: function () {
-      var _spriteSheet = this.model.get('mapTileSpriteSheet');
+      var _spriteSheet = this.model.get('gameTileSpriteSheet');
 
       var _sprite = new createjs.Sprite(_spriteSheet );
       _sprite.gotoAndStop( this.model.get('frameId') );

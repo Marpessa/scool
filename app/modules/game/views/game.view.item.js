@@ -1,4 +1,4 @@
-// map.view.item.js
+// game.view.item.js
 define( [
 	"app",
 	"easeljs"
@@ -8,7 +8,7 @@ define( [
 
   return Backbone.Marionette.ItemView.extend({
 
-  	id: 'map',
+  	id: 'game',
   	tileSpriteSheet: "",
     playerSpriteSheet: "",
 
@@ -17,10 +17,10 @@ define( [
 	  },
 
 	  render: function () {
-	  	this.renderMap();
+	  	this.renderGame();
 	  },
 
-	  renderMap: function() {
+	  renderGame: function() {
 
 	  	// Load Tiles Sprites
 	  	var _data = {

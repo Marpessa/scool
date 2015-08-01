@@ -10,12 +10,12 @@ define( [ "app" ], function( App ) {
 		initialize: function(options) {
 			this.options = options;
 
-	    var MapModule = options.Modules.MapModule;
+	    var GameModule = options.Modules.GameModule;
 
-	    this.listenTo(MapModule.ControllerItem, 'onRenderView', this.onRenderView);
+	    this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onRenderView);
 	  },
 
-	  onRenderView: function(_mapController)
+	  onRenderView: function(_gameController)
 	  {
 			var Collection = new this.options.Collection();
 

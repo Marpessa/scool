@@ -18,10 +18,10 @@ define( [
   App.addInitializer(function (options) {
     this.options = options;
 
-    this.stage = new createjs.Stage( "cMap" );
+    this.stage = new createjs.Stage( "cGame" );
 
     this.options.LoaderModule.start();
-    this.options.MapModule.start();
+    this.options.GameModule.start();
     this.options.LayerModule.start();
     this.options.TileModule.start();
     this.options.PlayerModule.start();

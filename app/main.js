@@ -59,17 +59,17 @@ require([
 
   // Modules
   'modules/loader/loader',
-  'modules/map/map',
+  'modules/game/game',
   'modules/layer/layer',
   'modules/tile/tile',
   'modules/player/player'
-], function(App, LoaderModule, MapModule, LayerModule, TileModule, PlayerModule) {
+], function(App, LoaderModule, GameModule, LayerModule, TileModule, PlayerModule) {
 
   'use strict';
 
   var options = {
     LoaderModule: LoaderModule,
-    MapModule: MapModule,
+    GameModule: GameModule,
     LayerModule: LayerModule,
     TileModule: TileModule,
     PlayerModule: PlayerModule

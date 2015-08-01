@@ -5,20 +5,30 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
-  	mapTileSpriteSheet: "",
+  	gameTileSpriteSheet: "",
+
+    /*collectionEvents: {
+      "click:foo": "doSomething"
+    },*/
 
 		initialize: function(options) {
       this.options = options;
 
-      var MapModule = this.options.Modules.MapModule;
+      var GameModule = this.options.Modules.GameModule;
       var LayerModule = this.options.Modules.LayerModule;
 
-      this.listenTo(MapModule.ControllerItem, 'onRenderView', this.onLoadSpriteSheet); // Always call before Layer listener
+      this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onLoadSpriteSheet); // Always call before Layer listener
       this.listenTo(LayerModule.ControllerItem, 'onRenderView', this.onRenderView);
+
+      /*Marionette.bindEntityEvents(this, this.Collection, this.collectionEvents);*/
     },
 
-    onLoadSpriteSheet: function(_mapController) {
-      this.mapTileSpriteSheet = _mapController.ViewItem.tileSpriteSheet;
+    doSomething: function() {
+      console.info( "test" );
+    },
+
+    onLoadSpriteSheet: function(_gameController) {
+      this.gameTileSpriteSheet = _gameController.ViewItem.tileSpriteSheet;
     },
 
     onRenderView: function( _layerController )
@@ -87,7 +97,7 @@ define( [ "app" ], function( App ) {
         collection.models[i].set('posY', _posY);
         collection.models[i].set('layerIndex', _layerChild._index);
         collection.models[i].set('layerContent', _layerChild.getContent());
-        collection.models[i].set('mapTileSpriteSheet', this.mapTileSpriteSheet);
+        collection.models[i].set('gameTileSpriteSheet', this.gameTileSpriteSheet);
 
         // All tiles loaded / Render View
         if( i == _nbTiles-1 ) {

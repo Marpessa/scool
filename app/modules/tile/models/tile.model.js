@@ -9,7 +9,7 @@ define( [ "app" ], function( App ) {
       return {
                 layerIndex: "",
       					layerContent: "",
-                mapTileSpriteSheet: "",
+                gameTileSpriteSheet: "",
                 frameId: 0,
                 width: 0,
                 height: 0,
