@@ -6,19 +6,39 @@ define( [ "app" ], function( App ) {
   return Backbone.Marionette.Object.extend({
 
   	ViewItem: "",
+    mapPlayerSpriteSheet: "",
 
 		initialize: function(options) {
-	    var ModelItem = new options.Model();
-	    this.ViewItem = new options.ItemView({ model: ModelItem });
+	    this.options = options;
 
-	    this.listenTo(App, 'onHandleComplete', this.onRenderView);
+	    var ModelItem = new this.options.Model();
+	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
+
+      var MapModule = this.options.Modules.MapModule;
+      var TileModule = this.options.Modules.TileModule;
+
+	    this.listenTo(MapModule.ControllerItem, 'onRenderView', this.onLoadSpriteSheet); // Always call before Tile listener
+	    this.listenTo(TileModule.ControllerItem, 'onRenderView', this.onRenderView);
 	  },
 
-	  onRenderView: function()
-	  {
-	  	this.ViewItem.render();
+	  onLoadSpriteSheet: function(_mapController) {
+	  	this.ViewItem.model.set('mapPlayerSpriteSheet', _mapController.ViewItem.playerSpriteSheet);
+      //this.mapPlayerSpriteSheet = _mapController.ViewItem.playerSpriteSheet;
+    },
 
-	  	this.triggerMethod('onRenderView', this);
+	  onRenderView: function(_tileController, _collection, _layerChild)
+	  {
+	  	var baseLayerIndex = 0;
+	  	var baseTileIndex = 15;
+	  	if(_layerChild._index == baseLayerIndex) {
+
+	  		this.ViewItem.model.set('posX', _collection.models[baseTileIndex].get( 'posX' ) + 25);
+	  		this.ViewItem.model.set('posY', _collection.models[baseTileIndex].get( 'posY' ) - 40);
+		  	this.ViewItem.model.set('layerContent', _layerChild.getContent());
+		  	this.ViewItem.render();
+
+	  		// this.triggerMethod('onRenderView', this); // Not use for this moment
+	  	}
 	  }
 
   });

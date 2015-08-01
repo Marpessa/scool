@@ -7,8 +7,9 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
       return {
+                layerIndex: "",
       					layerContent: "",
-                mapSpriteSheet: "",
+                mapTileSpriteSheet: "",
                 frameId: 0,
                 width: 0,
                 height: 0,

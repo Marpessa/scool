@@ -7,8 +7,15 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
     	return  {
-								width: 32,
-						    height: 32
+    		        layerContent: "",
+    		        mapPlayerSpriteSheet: "",
+    		        frameId: 0,
+								width: 100,
+						    height: 50,
+						    posX: 0,
+	              posY: 0,
+                alpha: 1,
+                visible: true
 							}
 		},
 

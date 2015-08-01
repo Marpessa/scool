@@ -12,7 +12,7 @@ define( [ "app" ], function( App ) {
     },
 
 	  render: function () {
-      var _spriteSheet = this.model.get('mapSpriteSheet');
+      var _spriteSheet = this.model.get('mapTileSpriteSheet');
 
       var _sprite = new createjs.Sprite(_spriteSheet );
       _sprite.gotoAndStop( this.model.get('frameId') );
@@ -24,6 +24,17 @@ define( [ "app" ], function( App ) {
 
       var _layerContent = this.model.get('layerContent');
       _layerContent.addChild(_sprite);
+
+
+      // DEV
+      if( this.model.get( 'visible' ) == true ) {
+        var text = new createjs.Text("[" + this.model.get( 'indexX' ) + " - " + this.model.get( 'indexY' ) + "]", "12px Arial", "#000");
+        text.x = this.model.get( 'posX' ) + this.model.get( 'width' )/3;
+        text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
+        text.textBaseline = "alphabetic";
+
+        _layerContent.addChild(text);
+      }
 	  }
 
   });

@@ -5,7 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
-  	mapSpriteSheet: "",
+  	mapTileSpriteSheet: "",
 
 		initialize: function(options) {
       this.options = options;
@@ -18,7 +18,7 @@ define( [ "app" ], function( App ) {
     },
 
     onLoadSpriteSheet: function(_mapController) {
-      this.mapSpriteSheet = _mapController.ViewItem.spriteSheet;
+      this.mapTileSpriteSheet = _mapController.ViewItem.tileSpriteSheet;
     },
 
     onRenderView: function( _layerController )
@@ -43,7 +43,12 @@ define( [ "app" ], function( App ) {
 
             var _layerChild = _layerCollectionChildren.findByIndex(collection.layerIndex);
 
-            _this.onRenderViewComplete( _this, _layerChild, collection );
+            _this.onRenderViewComplete( _layerChild, collection );
+
+            // Last Layer rendering
+            //if( collection.layerIndex == _layerCollectionChildrenLength - 1) {
+              _this.triggerMethod('onRenderView', _this, collection, _layerChild);
+            //}
           },
 
           error: function(collection, response, options) {
@@ -53,7 +58,7 @@ define( [ "app" ], function( App ) {
       }
     },
 
-    onRenderViewComplete: function( _this, _layerChild, collection ) {
+    onRenderViewComplete: function( _layerChild, collection ) {
       var _nbTilesByRow = _layerChild.model.get('nbTilesByRow');
       var _nbTiles = collection.length;
       var _nbRows = _nbTiles/_nbTilesByRow;
@@ -80,12 +85,13 @@ define( [ "app" ], function( App ) {
         collection.models[i].set('height', _height);
         collection.models[i].set('posX', _posX);
         collection.models[i].set('posY', _posY);
+        collection.models[i].set('layerIndex', _layerChild._index);
         collection.models[i].set('layerContent', _layerChild.getContent());
-        collection.models[i].set('mapSpriteSheet', this.mapSpriteSheet);
+        collection.models[i].set('mapTileSpriteSheet', this.mapTileSpriteSheet);
 
         // All tiles loaded / Render View
         if( i == _nbTiles-1 ) {
-          var _ViewCollection = new _this.options.CollectionView({ Collection: collection });
+          var _ViewCollection = new this.options.CollectionView({ Collection: collection });
           _ViewCollection.render();
         }
       }

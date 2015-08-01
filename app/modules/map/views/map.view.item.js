@@ -9,7 +9,8 @@ define( [
   return Backbone.Marionette.ItemView.extend({
 
   	id: 'map',
-  	spriteSheet: "",
+  	tileSpriteSheet: "",
+    playerSpriteSheet: "",
 
   	initialize: function(options) {
 
@@ -21,7 +22,7 @@ define( [
 
 	  renderMap: function() {
 
-	  	// Load Sprites
+	  	// Load Tiles Sprites
 	  	var _data = {
         images: [App.queue.getResult( "map_0_0" )],
         frames: [
@@ -49,7 +50,23 @@ define( [
         }
       };
       
-      this.spriteSheet = new createjs.SpriteSheet(_data);
+      this.tileSpriteSheet = new createjs.SpriteSheet(_data);
+
+      // Load Player Sprites
+      var _data = {
+        images: [App.queue.getResult( "player" )],
+        frames: [
+          // x, y, width, height, imageIndex*, regX*, regY*
+          [0, 0, 60, 100],
+          [60, 0, 60, 100],
+        ],
+        animations: {
+          "frame_0": 0,
+          "frame_1": 1
+        }
+      };
+      
+      this.playerSpriteSheet = new createjs.SpriteSheet(_data);
 	  }
 
   });

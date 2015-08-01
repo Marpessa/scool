@@ -8,9 +8,6 @@ define( [
 
   return Backbone.Marionette.ItemView.extend({
 
-  	id: 'player',
-  	spriteSheet: "",
-
   	initialize: function(options) {
 
 	  },
@@ -20,36 +17,18 @@ define( [
 	  },
 
 	  renderPlayer: function() {
+	  	var _spriteSheet = this.model.get('mapPlayerSpriteSheet');
 
-	  	// Load Sprites
-	  	/*var _data = {
-        images: [App.queue.getResult( "map_0_0" )],
-        frames: [
-          // x, y, width, height, imageIndex*, regX*, regY*
-          [100, 0, 100, 100],
-          [200, 0, 100, 100],
-          [300, 0, 100, 100],
-          [0, 100, 100, 100],
-          [100, 100, 100, 100],
-          [200, 100, 100, 100],
-          [300, 100, 100, 100],
-          [0, 200, 100, 100],
-          [100, 200, 100, 100]
-        ],
-        animations: {
-          "frame_0": 0,
-          "frame_1": 1,
-          "frame_2": 2,
-          "frame_3": 3,
-          "frame_4": 4,
-          "frame_5": 5,
-          "frame_6": 6,
-          "frame_7": 7,
-          "frame_8": 8
-        }
-      };
-      
-      this.spriteSheet = new createjs.SpriteSheet(_data);*/
+	  	var _sprite = new createjs.Sprite(_spriteSheet );
+      _sprite.gotoAndStop( this.model.get('frameId') );
+
+      _sprite.x = this.model.get( 'posX' );
+      _sprite.y = this.model.get( 'posY' );
+      _sprite.alpha = this.model.get( 'alpha' );
+      _sprite.visible = this.model.get( 'visible' );
+
+      var _layerContent = this.model.get('layerContent');
+      _layerContent.addChild(_sprite);	  	
 	  }
 
   });

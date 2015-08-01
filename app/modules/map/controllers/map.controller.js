@@ -8,8 +8,10 @@ define( [ "app" ], function( App ) {
   	ViewItem: "",
 
 		initialize: function(options) {
-	    var ModelItem = new options.Model();
-	    this.ViewItem = new options.ItemView({ model: ModelItem });
+			this.options = options;
+			
+	    var ModelItem = new this.options.Model();
+	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
 
 	    this.listenTo(App, 'onHandleComplete', this.onRenderView);
 	  },
