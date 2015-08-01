@@ -8,7 +8,7 @@ define( [ "app" ], function( App ) {
     attributes : function() {
     },
 
-  	initialize: function () {
+    initialize: function () {
     },
 
 	  render: function () {
@@ -25,17 +25,23 @@ define( [ "app" ], function( App ) {
       var _layerContent = this.model.get('layerContent');
       _layerContent.addChild(_sprite);
 
+      // Event click on one tile
+      _sprite.on("click", function(event){ this.click(event, _sprite); }.bind(this) );
 
-      // DEV
+      // --- DEV ---
       if( this.model.get( 'visible' ) == true ) {
-        var text = new createjs.Text("[" + this.model.get( 'indexX' ) + " - " + this.model.get( 'indexY' ) + "]", "12px Arial", "#000");
+        var text = new createjs.Text("[" + this.model.get( 'posX' ) + " - " + this.model.get( 'posY' ) + "]", "12px Arial", "#000");
         text.x = this.model.get( 'posX' ) + this.model.get( 'width' )/3;
         text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
         text.textBaseline = "alphabetic";
 
         _layerContent.addChild(text);
       }
-	  }
+	  },
+
+    click: function (event, _sprite) {
+      console.info( "[" + _sprite.x + " - " + _sprite.y + "]" );
+    }
 
   });
 

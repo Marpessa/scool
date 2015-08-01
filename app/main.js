@@ -7,7 +7,8 @@ requirejs.config({
     backbone: '../assets/js/libs/backbone-1.1.2',
     marionette: '../assets/js/libs/backbone.marionette-2.4.1.min',
     easeljs: '../assets/js/libs/easeljs-0.8.0.min',
-    preloadjs: '../assets/js/libs/preloadjs-0.6.0.min'
+    preloadjs: '../assets/js/libs/preloadjs-0.6.0.min',
+    pathfinding: '../assets/js/libs/pathfinding-browser.min'
   },
   shim: {
     jquery : {
@@ -35,6 +36,10 @@ requirejs.config({
     preloadjs: {
       exports: 'preloadjs',
       deps : ['easeljs']
+    },
+
+    pathfinding: {
+      exports: 'pathfinding'
     }
   }
 });

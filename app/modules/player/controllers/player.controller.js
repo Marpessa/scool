@@ -1,5 +1,8 @@
 // player.controller.js
-define( [ "app" ], function( App ) {
+define( [ 
+	'app',
+  'pathfinding'
+ ], function( App, PF ) {
 
 	'use strict';
 
@@ -7,9 +10,14 @@ define( [ "app" ], function( App ) {
 
   	ViewItem: "",
     mapPlayerSpriteSheet: "",
+    finder: "",
 
 		initialize: function(options) {
 	    this.options = options;
+
+	    this.finder = new PF.AStarFinder({
+		    allowDiagonal: true
+		  });
 
 	    var ModelItem = new this.options.Model();
 	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
