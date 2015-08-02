@@ -76,6 +76,8 @@ define( [ "app" ], function( App ) {
 
     click: function (event, _sprite) {
       console.info( "[" + _sprite.x + " - " + _sprite.y + "]" );
+
+      this.triggerMethod('tile:itemView:click');
     }
 
   });

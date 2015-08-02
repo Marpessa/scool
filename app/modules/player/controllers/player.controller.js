@@ -11,6 +11,10 @@ define( [
   	ViewItem: "",
     finder: "",
 
+    collectionEvents: {
+	    "tile:collectionView:click": "onMove"
+	  },
+
 		initialize: function(options) {
 	    this.options = options;
 
@@ -27,8 +31,7 @@ define( [
 	    this.listenTo(TileModule.ControllerItem, 'onRenderView', this.onRenderView);
 	  },
 
-	  onRenderView: function(_tileController, _collection, _layerChild)
-	  {
+	  onRenderView: function(_tileController, _collection, _layerChild) {
 	  	var baseLayerIndex = 0;
 	  	var baseTileIndex = 15;
 	  	if(_layerChild._index == baseLayerIndex) {
@@ -39,7 +42,14 @@ define( [
 		  	this.ViewItem.render();
 
 	  		this.triggerMethod('onRenderView');
+
+	  		// Listener
+	  		Backbone.Marionette.bindEntityEvents(this, this.options.Modules.TileModule.ControllerItem.ViewCollection, this.collectionEvents);
 	  	}
+	  },
+
+	  onMove: function() {
+	  	console.info( "move" );
 	  }
 
   });

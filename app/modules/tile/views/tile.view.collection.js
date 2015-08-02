@@ -12,6 +12,12 @@ define( [
   	childView: ItemView,
   	collection: "",
 
+    childEvents: {
+      'tile:itemView:click': function () {
+        this.triggerMethod('tile:collectionView:click');
+      }
+    },
+
   	initialize: function(options) {
 	    this.collection = options.Collection;
 	  },
@@ -22,6 +28,7 @@ define( [
 
   	onRender: function() {
   	}
+
   });
 
 });

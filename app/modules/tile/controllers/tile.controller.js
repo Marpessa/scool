@@ -5,9 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
-    /*collectionEvents: {
-      "click:foo": "doSomething"
-    },*/
+    ViewCollection: "",
 
 		initialize: function(options) {
       this.options = options;
@@ -16,16 +14,9 @@ define( [ "app" ], function( App ) {
       var LayerModule = this.options.Modules.LayerModule;
 
       this.listenTo(LayerModule.ControllerItem, 'onRenderView', this.onLoadTiles);
-
-      /*Marionette.bindEntityEvents(this, this.Collection, this.collectionEvents);*/
     },
 
-    /*doSomething: function() {
-      console.info( "test" );
-    },*/
-
-    onLoadTiles: function( _layerController )
-    {
+    onLoadTiles: function( _layerController ) {
       var _layerCollectionChildren = _layerController.ViewCollection.children;
       
       var z = 0;
@@ -48,8 +39,6 @@ define( [ "app" ], function( App ) {
 
             _this.onRenderView( _layerChild, collection );
 
-            //if( collection.layerIndex == _layerCollectionChildrenLength - 1) {
-            //}
           },
 
           error: function(collection, response, options) {
@@ -91,8 +80,8 @@ define( [ "app" ], function( App ) {
 
         // All tiles loaded / Render View
         if( i == _nbTiles-1 ) {
-          var _ViewCollection = new this.options.CollectionView({ Collection: collection });
-          _ViewCollection.render();
+          this.ViewCollection = new this.options.CollectionView({ Collection: collection });
+          this.ViewCollection.render();
 
           // Trigger Layer rendering
           this.triggerMethod('onRenderView', this, collection, _layerChild);

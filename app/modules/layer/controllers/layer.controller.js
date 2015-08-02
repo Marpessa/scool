@@ -7,12 +7,17 @@ define( [ "app" ], function( App ) {
 
   	ViewCollection: "",
 
+  	itemEvents: {
+	    "game:itemView:renderGame": "onLoadTiles"
+	  },
+
 		initialize: function(options) {
 			this.options = options;
 
 	    var GameModule = options.Modules.GameModule;
 
-	    this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onLoadTiles);
+	    // Listeners
+	    Backbone.Marionette.bindEntityEvents(this, GameModule.ControllerItem.ViewItem, this.itemEvents);
 	  },
 
 	  onLoadTiles: function(_gameController)
@@ -25,7 +30,7 @@ define( [ "app" ], function( App ) {
 	    	success: function(collection, response, options) {
         	console.info("[Layer.controller.js] JSON file load was successful");
 
-        	_this.onRenderView( _this, collection );
+        	_this.onRenderView(_this, collection);
 		    },
 
 		    error: function(collection, response, options) {
@@ -35,7 +40,7 @@ define( [ "app" ], function( App ) {
 
 	  },
 
-	  onRenderView: function( _this, collection ) {
+	  onRenderView: function(_this, collection) {
 	  	_this.ViewCollection = new _this.options.CollectionView({ Collection: collection });
 			_this.ViewCollection.render();
 

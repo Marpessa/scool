@@ -18,6 +18,7 @@ define( [ "app" ], function( App ) {
 	  },
 
 	  renderGame: function() {
+	  	this.triggerMethod('game:itemView:renderGame', this);
 	  }
 
   });
