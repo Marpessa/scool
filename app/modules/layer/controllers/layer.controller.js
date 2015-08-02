@@ -12,10 +12,10 @@ define( [ "app" ], function( App ) {
 
 	    var GameModule = options.Modules.GameModule;
 
-	    this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onRenderView);
+	    this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onLoadTiles);
 	  },
 
-	  onRenderView: function(_gameController)
+	  onLoadTiles: function(_gameController)
 	  {
 			var Collection = new this.options.Collection();
 
@@ -25,7 +25,7 @@ define( [ "app" ], function( App ) {
 	    	success: function(collection, response, options) {
         	console.info("[Layer.controller.js] JSON file load was successful");
 
-        	_this.onRenderViewComplete( _this, collection );
+        	_this.onRenderView( _this, collection );
 		    },
 
 		    error: function(collection, response, options) {
@@ -35,7 +35,7 @@ define( [ "app" ], function( App ) {
 
 	  },
 
-	  onRenderViewComplete: function( _this, collection ) {
+	  onRenderView: function( _this, collection ) {
 	  	_this.ViewCollection = new _this.options.CollectionView({ Collection: collection });
 			_this.ViewCollection.render();
 

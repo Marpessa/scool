@@ -16,7 +16,6 @@ define( [
 	  },
 
   	onRender: function() {
-      App.stage.update();
   	}
   });
 

@@ -5,8 +5,6 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
-  	gameTileSpriteSheet: "",
-
     /*collectionEvents: {
       "click:foo": "doSomething"
     },*/
@@ -17,21 +15,16 @@ define( [ "app" ], function( App ) {
       var GameModule = this.options.Modules.GameModule;
       var LayerModule = this.options.Modules.LayerModule;
 
-      this.listenTo(GameModule.ControllerItem, 'onRenderView', this.onLoadSpriteSheet); // Always call before Layer listener
-      this.listenTo(LayerModule.ControllerItem, 'onRenderView', this.onRenderView);
+      this.listenTo(LayerModule.ControllerItem, 'onRenderView', this.onLoadTiles);
 
       /*Marionette.bindEntityEvents(this, this.Collection, this.collectionEvents);*/
     },
 
-    doSomething: function() {
+    /*doSomething: function() {
       console.info( "test" );
-    },
+    },*/
 
-    onLoadSpriteSheet: function(_gameController) {
-      this.gameTileSpriteSheet = _gameController.ViewItem.tileSpriteSheet;
-    },
-
-    onRenderView: function( _layerController )
+    onLoadTiles: function( _layerController )
     {
       var _layerCollectionChildren = _layerController.ViewCollection.children;
       
@@ -53,11 +46,9 @@ define( [ "app" ], function( App ) {
 
             var _layerChild = _layerCollectionChildren.findByIndex(collection.layerIndex);
 
-            _this.onRenderViewComplete( _layerChild, collection );
+            _this.onRenderView( _layerChild, collection );
 
-            // Last Layer rendering
             //if( collection.layerIndex == _layerCollectionChildrenLength - 1) {
-              _this.triggerMethod('onRenderView', _this, collection, _layerChild);
             //}
           },
 
@@ -68,7 +59,7 @@ define( [ "app" ], function( App ) {
       }
     },
 
-    onRenderViewComplete: function( _layerChild, collection ) {
+    onRenderView: function( _layerChild, collection ) {
       var _nbTilesByRow = _layerChild.model.get('nbTilesByRow');
       var _nbTiles = collection.length;
       var _nbRows = _nbTiles/_nbTilesByRow;
@@ -97,13 +88,16 @@ define( [ "app" ], function( App ) {
         collection.models[i].set('posY', _posY);
         collection.models[i].set('layerIndex', _layerChild._index);
         collection.models[i].set('layerContent', _layerChild.getContent());
-        collection.models[i].set('gameTileSpriteSheet', this.gameTileSpriteSheet);
 
         // All tiles loaded / Render View
         if( i == _nbTiles-1 ) {
           var _ViewCollection = new this.options.CollectionView({ Collection: collection });
           _ViewCollection.render();
+
+          // Trigger Layer rendering
+          this.triggerMethod('onRenderView', this, collection, _layerChild);
         }
+
       }
     }
 

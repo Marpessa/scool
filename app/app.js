@@ -20,15 +20,15 @@ define( [
 
     this.stage = new createjs.Stage( "cGame" );
 
+    this.queue = new createjs.LoadQueue();
+    this.queue.on("complete", handleComplete, this);
+    this.queue.on("progress", handleProgress, this);
+
     this.options.LoaderModule.start();
     this.options.GameModule.start();
     this.options.LayerModule.start();
     this.options.TileModule.start();
     this.options.PlayerModule.start();
-
-    this.queue = new createjs.LoadQueue();
-    this.queue.on("complete", handleComplete, this);
-    this.queue.on("progress", handleProgress, this);
 
     var _manifest = [
       {id: "map_0_0", src:"sprite0.png"},
@@ -37,11 +37,15 @@ define( [
 
     this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
+    // Listeners
+    this.listenTo(this.options.TileModule.ControllerItem, 'onRenderView', stageUpdate);
+    this.listenTo(this.options.PlayerModule.ControllerItem, 'onRenderView', stageUpdate);
+
     function handleProgress(_this) {
       console.info( "Loading..." );
       
       App.triggerMethod('onHandleProgress');
-      App.stage.update();
+      stageUpdate();
     }
 
     function handleComplete(_this) {
@@ -49,6 +53,10 @@ define( [
       App.options.LoaderModule.stop();
 
       App.triggerMethod('onHandleComplete');
+      stageUpdate();
+    }
+
+    function stageUpdate() {
       App.stage.update();
     }
   });

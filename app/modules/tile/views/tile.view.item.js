@@ -8,13 +8,48 @@ define( [ "app" ], function( App ) {
     attributes : function() {
     },
 
-    initialize: function () {
+    initialize: function (options) {
     },
 
-	  render: function () {
-      var _spriteSheet = this.model.get('gameTileSpriteSheet');
+    _loadSpriteSheet: function() {
+      // Load Tiles Sprites
+      var _data = {
+        images: [App.queue.getResult( "map_0_0" )],
+        frames: [
+          // x, y, width, height, imageIndex*, regX*, regY*
+          [100, 0, 100, 100],
+          [200, 0, 100, 100],
+          [300, 0, 100, 100],
+          [0, 100, 100, 100],
+          [100, 100, 100, 100],
+          [200, 100, 100, 100],
+          [300, 100, 100, 100],
+          [0, 200, 100, 100],
+          [100, 200, 100, 100]
+        ],
+        animations: {
+          "frame_0": 0,
+          "frame_1": 1,
+          "frame_2": 2,
+          "frame_3": 3,
+          "frame_4": 4,
+          "frame_5": 5,
+          "frame_6": 6,
+          "frame_7": 7,
+          "frame_8": 8
+        }
+      };
+      
+      this.tileSpriteSheet = new createjs.SpriteSheet(_data);
+    },
 
-      var _sprite = new createjs.Sprite(_spriteSheet );
+    render: function () {
+      this._loadSpriteSheet();
+      this.renderTile();
+    },
+
+	  renderTile: function () {
+      var _sprite = new createjs.Sprite(this.tileSpriteSheet);
       _sprite.gotoAndStop( this.model.get('frameId') );
 
       _sprite.x = this.model.get( 'posX' );
