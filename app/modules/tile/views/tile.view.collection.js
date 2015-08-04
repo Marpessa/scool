@@ -8,13 +8,15 @@ define( [
 
   return Backbone.Marionette.CollectionView.extend({
 
-    id: "",
   	childView: ItemView,
   	collection: "",
 
     childEvents: {
-      'tile:itemView:click': function () {
-        this.triggerMethod('tile:collectionView:click');
+      'tile:itemView:render': function (childItem) {
+        this.triggerMethod('tile:collectionView:render', childItem);
+      },
+      'tile:itemView:click': function (childItem) {
+        this.triggerMethod('tile:collectionView:click', childItem);
       }
     },
 

@@ -19,6 +19,8 @@ define( [ "app" ], function( App ) {
       this.content.y = this.model.get( 'posY' ) + this.model.get( 'posZ' );
 
       App.stage.addChild(this.content);
+
+      this.triggerMethod('layer:itemView:render', this);
 	  },
 
     getContent: function() {

@@ -34,10 +34,11 @@ define( [	"app" ], function( App ) {
 	  render: function () {
 	  	this._loadSpriteSheet();
 	  	this.renderPlayer();
-	  },
+      this.triggerMethod('player:itemView:render', this);
+    },
 
-	  renderPlayer: function() {
-	  	var _sprite = new createjs.Sprite(this.playerSpriteSheet);
+    renderPlayer: function() {
+      var _sprite = new createjs.Sprite(this.playerSpriteSheet);
       _sprite.gotoAndStop( this.model.get('frameId') );
 
       _sprite.x = this.model.get( 'posX' );
@@ -46,7 +47,7 @@ define( [	"app" ], function( App ) {
       _sprite.visible = this.model.get( 'visible' );
 
       var _layerContent = this.model.get('layerContent');
-      _layerContent.addChild(_sprite);	  	
+      _layerContent.addChild(_sprite);
 	  }
 
   });

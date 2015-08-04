@@ -5,6 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
+  	Collection: "",
   	ViewCollection: "",
 
   	itemEvents: {
@@ -16,21 +17,21 @@ define( [ "app" ], function( App ) {
 
 	    var GameModule = options.Modules.GameModule;
 
+	    this.Collection = new this.options.Collection();
+	    this.ViewCollection = new this.options.CollectionView({ Collection: this.Collection });
 	    // Listeners
 	    Backbone.Marionette.bindEntityEvents(this, GameModule.ControllerItem.ViewItem, this.itemEvents);
 	  },
 
 	  onLoadTiles: function(_gameController)
 	  {
-			var Collection = new this.options.Collection();
-
 			var _this = this;
-	    Collection.fetch({
+	    this.Collection.fetch({
 	    	dataType: 'json',
 	    	success: function(collection, response, options) {
         	console.info("[Layer.controller.js] JSON file load was successful");
 
-        	_this.onRenderView(_this, collection);
+        	_this.ViewCollection.render();
 		    },
 
 		    error: function(collection, response, options) {
@@ -38,13 +39,6 @@ define( [ "app" ], function( App ) {
 		    }
 	    });
 
-	  },
-
-	  onRenderView: function(_this, collection) {
-	  	_this.ViewCollection = new _this.options.CollectionView({ Collection: collection });
-			_this.ViewCollection.render();
-
-			_this.triggerMethod('onRenderView', _this);
 	  }
 
   });

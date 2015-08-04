@@ -38,8 +38,8 @@ define( [
     this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
     // Listeners
-    this.listenTo(this.options.TileModule.ControllerItem, 'onRenderView', stageUpdate);
-    this.listenTo(this.options.PlayerModule.ControllerItem, 'onRenderView', stageUpdate);
+    // this.listenTo(this.options.TileModule.ControllerItem.ViewCollection, 'tile:collectionView:render', stageUpdate); // TOFO
+    this.listenTo(this.options.PlayerModule.ControllerItem.ViewItem, 'player:itemView:render', stageUpdate);
 
     function handleProgress(_this) {
       console.info( "Loading..." );

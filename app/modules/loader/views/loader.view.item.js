@@ -22,6 +22,7 @@ define( [ "app" ], function( App ) {
 
     render: function () {
       App.stage.addChild(this.loadProgressLabel);
+      // this.triggerMethod('loader:itemView:render'); // TODO
     },
 
     reset: function() {

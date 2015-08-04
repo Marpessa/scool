@@ -11,12 +11,23 @@ define( [
   	childView: ItemView,
   	collection: "",
 
+    childEvents: {
+      'layer:itemView:render': function (childItem) {
+        this.triggerMethod('layer:collectionView:render', childItem);
+      }
+    },
+
   	initialize: function(options) {
 	    this.collection = options.Collection;
 	  },
 
+    getChildView: function(item) {
+      return ItemView;
+    },
+
   	onRender: function() {
   	}
+
   });
 
 });

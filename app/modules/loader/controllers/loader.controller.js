@@ -17,8 +17,6 @@ define( [ "app" ], function( App ) {
 	  onRenderView: function()
 	  {
 	  	this.ViewItem.render();
-
-	  	this.triggerMethod('onRenderView');
 	  },
 
 	  onReset: function()

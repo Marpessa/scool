@@ -5,7 +5,12 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
+    Collection: "",
     ViewCollection: "",
+
+    collectionEvents: {
+      "layer:collectionView:render": "onLoadTiles"
+    },
 
 		initialize: function(options) {
       this.options = options;
@@ -13,43 +18,38 @@ define( [ "app" ], function( App ) {
       var GameModule = this.options.Modules.GameModule;
       var LayerModule = this.options.Modules.LayerModule;
 
-      this.listenTo(LayerModule.ControllerItem, 'onRenderView', this.onLoadTiles);
+      this.Collection = new this.options.Collection();
+      this.ViewCollection = new this.options.CollectionView({ Collection: this.Collection });
+
+      // Listeners
+      Backbone.Marionette.bindEntityEvents(this, LayerModule.ControllerItem.ViewCollection, this.collectionEvents);
     },
 
-    onLoadTiles: function( _layerController ) {
-      var _layerCollectionChildren = _layerController.ViewCollection.children;
-      
-      var z = 0;
-      var _layerCollectionChildrenLength = _layerCollectionChildren.length;
+    onLoadTiles: function(_layerItemView) {
 
-      for(z = 0; z < _layerCollectionChildrenLength; z++) {
-        var _layerChild = _layerCollectionChildren.findByIndex(z);
-        var _index = _layerChild.model.get('index');
+      var _layerItemModel = _layerItemView.model;
 
-        this.Collection = new this.options.Collection();
-        this.Collection.setLayerIndex(_index);
+      this.Collection.setLayerIndex(_layerItemModel.get("index"));
 
-        var _this = this;
-        this.Collection.fetch({
-          dataType: 'json',
-          success: function(collection, response, options) {
-            console.info("[Tile.controller.js] JSON file load was successful");
+      var _this = this;
+      this.Collection.fetch({
+        dataType: 'json',
+        success: function(collection, response, options) {
+          console.info("[Tile.controller.js] JSON file load was successful");
 
-            var _layerChild = _layerCollectionChildren.findByIndex(collection.layerIndex);
+          _this.onRenderView( _layerItemView, collection );
+        },
 
-            _this.onRenderView( _layerChild, collection );
-
-          },
-
-          error: function(collection, response, options) {
-            console.error('[Tile.controller.js] There was some error in loading and processing the JSON file' );
-          }
-        });
-      }
+        error: function(collection, response, options) {
+          console.error('[Tile.controller.js] There was some error in loading and processing the JSON file' );
+        }
+      });
     },
 
-    onRenderView: function( _layerChild, collection ) {
-      var _nbTilesByRow = _layerChild.model.get('nbTilesByRow');
+    onRenderView: function(_layerItemView, collection) {
+      var _layerItemModel = _layerItemView.model;
+
+      var _nbTilesByRow = _layerItemModel.get('nbTilesByRow');
       var _nbTiles = collection.length;
       var _nbRows = _nbTiles/_nbTilesByRow;
       var _nbCols = _nbTiles/_nbTilesByRow;
@@ -63,8 +63,8 @@ define( [ "app" ], function( App ) {
           _indexY++;
         }
 
-        var _width = _layerChild.model.get('tileWidth');
-        var _height = _layerChild.model.get('tileHeight');
+        var _width = _layerItemModel.get('tileWidth');
+        var _height = _layerItemModel.get('tileHeight');
 
         var _posX = (_indexY-_indexX) * _width/2;
         var _posY = (_indexX+_indexY) * _height/2;
@@ -75,16 +75,12 @@ define( [ "app" ], function( App ) {
         collection.models[i].set('height', _height);
         collection.models[i].set('posX', _posX);
         collection.models[i].set('posY', _posY);
-        collection.models[i].set('layerIndex', _layerChild._index);
-        collection.models[i].set('layerContent', _layerChild.getContent());
+        collection.models[i].set('layerIndex', _layerItemModel.get("index"));
+        collection.models[i].set('layerContent', _layerItemView.getContent());
 
         // All tiles loaded / Render View
         if( i == _nbTiles-1 ) {
-          this.ViewCollection = new this.options.CollectionView({ Collection: collection });
           this.ViewCollection.render();
-
-          // Trigger Layer rendering
-          this.triggerMethod('onRenderView', this, collection, _layerChild);
         }
 
       }

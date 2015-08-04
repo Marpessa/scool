@@ -13,7 +13,6 @@ define( [
   	url: function () {
       return "http://dev.scool.com/rest/map_0_0/layers.json?v=" + App.version;
     }
-
   });
 
 });

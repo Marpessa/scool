@@ -5,6 +5,8 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    tileSpriteSheet: "",
+
     attributes : function() {
     },
 
@@ -46,6 +48,8 @@ define( [ "app" ], function( App ) {
     render: function () {
       this._loadSpriteSheet();
       this.renderTile();
+
+      this.triggerMethod('tile:itemView:render', this);
     },
 
 	  renderTile: function () {
@@ -58,7 +62,9 @@ define( [ "app" ], function( App ) {
       _sprite.visible = this.model.get( 'visible' );
 
       var _layerContent = this.model.get('layerContent');
-      _layerContent.addChild(_sprite);
+      if( _layerContent ) {
+        _layerContent.addChild(_sprite);
+      }
 
       // Event click on one tile
       _sprite.on("click", function(event){ this.click(event, _sprite); }.bind(this) );
@@ -70,14 +76,16 @@ define( [ "app" ], function( App ) {
         text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
         text.textBaseline = "alphabetic";
 
-        _layerContent.addChild(text);
+        if( _layerContent ) {
+          _layerContent.addChild(text);
+        }
       }
 	  },
 
     click: function (event, _sprite) {
       console.info( "[" + _sprite.x + " - " + _sprite.y + "]" );
 
-      this.triggerMethod('tile:itemView:click');
+      this.triggerMethod('tile:itemView:click', this);
     }
 
   });
