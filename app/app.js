@@ -24,6 +24,7 @@ define( [
     this.options = options;
 
     this.stage = new createjs.Stage( "cGame" );
+    App.stage.enableMouseOver(30); // Enable Mouse over
 
     this.queue = new createjs.LoadQueue();
     this.queue.on("complete", handleComplete, this);

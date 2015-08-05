@@ -20,7 +20,7 @@ define( [
         this.triggerMethod(this.triggers.tileCollectionViewRender, childItem);
       },
       'tile:itemView:click': function (childItem) {
-        console.info("test");
+        console.info("collection click ok");
         this.triggerMethod(this.triggers.tileCollectionViewClick, childItem);
       }
     },
@@ -28,6 +28,10 @@ define( [
   	initialize: function(options) {
 	    this.collection = options.Collection;
 	  },
+
+    test: function() {
+      console.info( "tet" );
+    },
 
     getChildView: function(item) {
       return ItemView;

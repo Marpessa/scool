@@ -57,7 +57,8 @@ define( [ "app" ], function( App ) {
       this.triggerMethod(this.triggers.tileItemViewRender, this);
     },
 
-	  renderTile: function () {
+    renderTile: function () {
+
       var _sprite = new createjs.Sprite(this.tileSpriteSheet);
       _sprite.gotoAndStop( this.model.get('frameId') );
 
@@ -76,6 +77,16 @@ define( [ "app" ], function( App ) {
         this.click(event, _sprite);
       }.bind(this) );
 
+      // Event mouserover on one tile
+      _sprite.on("mouseover", function(event) {
+        this.mouseover(event, _sprite);
+      }.bind(this) );
+
+      // Event mouserover on one tile
+      _sprite.on("mouseout", function(event) {
+        this.mouseout(event, _sprite);
+      }.bind(this) );
+
       if( App.env == "dev") {
         if( this.model.get( 'visible' ) == true ) {
           var text = new createjs.Text("[" + this.model.get( 'posX' ) + " - " + this.model.get( 'posY' ) + "]", "12px Arial", "#000");
@@ -91,9 +102,21 @@ define( [ "app" ], function( App ) {
 	  },
 
     click: function (event, _sprite) {
-      console.info( "[" + _sprite.x + " - " + _sprite.y + "]" );
+      console.info( "Click : [" + _sprite.x + " - " + _sprite.y + "]" );
 
       this.triggerMethod(this.triggers.tileItemViewClick, this);
+    },
+
+    mouseover: function(event, _sprite) {
+      // TODO
+      _sprite.alpha = 0.8;
+      App.stage.update();
+    },
+
+    mouseout: function(event, _sprite) {
+      // TODO
+      _sprite.alpha = 1;
+      App.stage.update();
     }
 
   });
