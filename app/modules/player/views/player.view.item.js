@@ -5,12 +5,17 @@ define( [	"app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-  	playerSpriteSheet: "",
+    triggerMethods: {
+      'playerItemViewRender': 'player:itemView:render'
+    },
+    content: "",
+    playerSpriteSheet: "",
 
   	attributes : function() {
     },
 
   	initialize: function(options) {
+      this.content = new createjs.Container();
 	  },
 
 	  _loadSpriteSheet: function() {
@@ -34,7 +39,7 @@ define( [	"app" ], function( App ) {
 	  render: function () {
 	  	this._loadSpriteSheet();
 	  	this.renderPlayer();
-      this.triggerMethod('player:itemView:render', this);
+      this.triggerMethod(this.triggerMethods.playerItemViewRender, this);
     },
 
     renderPlayer: function() {

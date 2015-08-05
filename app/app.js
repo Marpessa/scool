@@ -14,7 +14,6 @@ define( [
 
   var currentModule;
 
-
   App.addInitializer(function (options) {
     this.options = options;
 
@@ -37,9 +36,18 @@ define( [
 
     this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
+    var LoaderViewItem = this.options.LoaderModule.ControllerItem.ViewItem;
+    var LayerViewCollection = this.options.LayerModule.ControllerItem.ViewCollection;
+    var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
+
+    // console.info( LayerViewItem );
+
     // Listeners
-    // this.listenTo(this.options.TileModule.ControllerItem.ViewCollection, 'tile:collectionView:render', stageUpdate); // TOFO
-    this.listenTo(this.options.PlayerModule.ControllerItem.ViewItem, 'player:itemView:render', stageUpdate);
+    this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewRender, addChild);
+    this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewReset, removeChild);
+    this.listenTo(LayerViewCollection, LayerViewCollection.triggerMethods.layerCollectionViewRender, addChild);
+    // this.listenTo(this.options.TileModule.ControllerItem.ViewCollection, 'tile:collectionView:render', stageUpdate); // TODO
+    this.listenTo(PlayerViewItem, PlayerViewItem.triggerMethods.playerItemViewRender, stageUpdate);
 
     function handleProgress(_this) {
       console.info( "Loading..." );
@@ -54,6 +62,14 @@ define( [
 
       App.triggerMethod('onHandleComplete');
       stageUpdate();
+    }
+
+    function addChild(elt) {
+      App.stage.addChild(elt.content);
+    }
+
+    function removeChild(elt) {
+      App.stage.removeChild(elt.content);
     }
 
     function stageUpdate() {

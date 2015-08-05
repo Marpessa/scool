@@ -29,19 +29,17 @@ define( [
       var GameModule = this.options.Modules.GameModule;
       var TileModule = this.options.Modules.TileModule;
 
-
 	  	// Listeners
 	  	Backbone.Marionette.bindEntityEvents(this, TileModule.ControllerItem.ViewCollection, this.collectionEvents);
 	  },
 
 	  onRenderView: function(_tileItemView) {
 	  	var _tileItemModel = _tileItemView.model;
-	  	var baseLayerIndex = 2;
-	  	var baseTileIndexX = 6;
-	  	var baseTileIndexY = 8;
-	  	if(_tileItemModel.get( 'layerIndex' ) == baseLayerIndex && _tileItemModel.get( 'indexX' ) == baseTileIndexX &&  _tileItemModel.get( 'indexY' ) == baseTileIndexY) {
-	  		this.ViewItem.model.set('posX', _tileItemModel.get( 'posX' ) + 25);
-	  		this.ViewItem.model.set('posY', _tileItemModel.get( 'posY' ) - 40);
+	  	if(_tileItemModel.get( 'layerIndex' ) == this.ViewItem.model.get('baseLayerIndex')
+	  		&& _tileItemModel.get( 'indexX' ) == this.ViewItem.model.get('baseTileIndexX')
+	  		&&  _tileItemModel.get( 'indexY' ) == this.ViewItem.model.get('baseTileIndexY')) {
+	  		this.ViewItem.model.set('posX', _tileItemModel.get( 'posX' ) + this.ViewItem.model.get('decX'));
+	  		this.ViewItem.model.set('posY', _tileItemModel.get( 'posY' ) - this.ViewItem.model.get('decY'));
 		  	this.ViewItem.model.set('layerContent',_tileItemModel.get('layerContent'));
 		  	this.ViewItem.render();
 	  	}

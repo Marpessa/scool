@@ -47,6 +47,7 @@ define( [ "app" ], function( App ) {
     },
 
     onRenderView: function(_layerItemView, collection) {
+      // TODO Muste be do with listener or directly in tileItemView ?
       var _layerItemModel = _layerItemView.model;
 
       var _nbTilesByRow = _layerItemModel.get('nbTilesByRow');
@@ -76,6 +77,7 @@ define( [ "app" ], function( App ) {
         collection.models[i].set('posX', _posX);
         collection.models[i].set('posY', _posY);
         collection.models[i].set('layerIndex', _layerItemModel.get("index"));
+
         collection.models[i].set('layerContent', _layerItemView.getContent());
 
         // All tiles loaded / Render View

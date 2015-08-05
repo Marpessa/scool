@@ -5,28 +5,32 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    triggerMethods: {
+      'loaderItemViewRender': 'loader:itemView:render',
+      'loaderItemViewReset': 'loader:itemView:reset'
+    },
     content: "",
 
     attributes : function() {
     },
 
     initialize: function () {
-      this.loadProgressLabel = new createjs.Text("Chargement...","18px Verdana","black");
-      this.loadProgressLabel.lineWidth = 200;
-      this.loadProgressLabel.textAlign = "center";
-      this.loadProgressLabel.x = 1200/2;
-      this.loadProgressLabel.y = 50;
+      var loadProgressLabel = new createjs.Text("Chargement...","18px Verdana","black");
+      loadProgressLabel.lineWidth = 200;
+      loadProgressLabel.textAlign = "center";
+      loadProgressLabel.x = 1200/2;
+      loadProgressLabel.y = 50;
 
-      //this.content = new createjs.Container();
+      this.content = new createjs.Container();
+      this.content.addChild(loadProgressLabel);
     },
 
     render: function () {
-      App.stage.addChild(this.loadProgressLabel);
-      // this.triggerMethod('loader:itemView:render'); // TODO
+      this.triggerMethod(this.triggerMethods.loaderItemViewRender, this);
     },
 
     reset: function() {
-      App.stage.removeChild(this.loadProgressLabel);
+      this.triggerMethod(this.triggerMethods.loaderItemViewReset, this);
     }
 
   });

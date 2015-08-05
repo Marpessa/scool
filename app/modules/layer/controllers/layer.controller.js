@@ -9,7 +9,7 @@ define( [ "app" ], function( App ) {
   	ViewCollection: "",
 
   	itemEvents: {
-	    "game:itemView:renderGame": "onLoadTiles"
+	    "game:itemView:render": "onLoadTiles"
 	  },
 
 		initialize: function(options) {

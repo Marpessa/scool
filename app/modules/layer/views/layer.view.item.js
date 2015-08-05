@@ -5,6 +5,9 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    triggerMethods: {
+      'layerItemViewRender': 'layer:itemView:render'
+    },
     content: "",
 
     attributes : function() {
@@ -18,9 +21,7 @@ define( [ "app" ], function( App ) {
       this.content.x = this.model.get( 'posX' );
       this.content.y = this.model.get( 'posY' ) + this.model.get( 'posZ' );
 
-      App.stage.addChild(this.content);
-
-      this.triggerMethod('layer:itemView:render', this);
+      this.triggerMethod(this.triggerMethods.layerItemViewRender, this);
 	  },
 
     getContent: function() {

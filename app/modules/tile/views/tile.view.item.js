@@ -5,6 +5,10 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    triggerMethods: {
+      'tileItemViewRender': 'tile:itemView:render',
+      'tileItemViewClick': 'tile:itemView:click'
+    },
     tileSpriteSheet: "",
 
     attributes : function() {
@@ -49,7 +53,7 @@ define( [ "app" ], function( App ) {
       this._loadSpriteSheet();
       this.renderTile();
 
-      this.triggerMethod('tile:itemView:render', this);
+      this.triggerMethod(this.triggerMethods.tileItemViewRender, this);
     },
 
 	  renderTile: function () {
@@ -85,7 +89,7 @@ define( [ "app" ], function( App ) {
     click: function (event, _sprite) {
       console.info( "[" + _sprite.x + " - " + _sprite.y + "]" );
 
-      this.triggerMethod('tile:itemView:click', this);
+      this.triggerMethod(this.triggerMethods.tileItemViewClick, this);
     }
 
   });
