@@ -7,9 +7,9 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
     	return  {
-								width: 640,
+								/*width: 640,
 						    height: 480,
-						    nbLayers : 6
+						    nbLayers : 6*/
 							}
 		},
 

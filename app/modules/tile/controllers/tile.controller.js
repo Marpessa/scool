@@ -47,7 +47,7 @@ define( [ "app" ], function( App ) {
     },
 
     onRenderView: function(_layerItemView, collection) {
-      // TODO Muste be do with listener or directly in tileItemView ?
+      // TODO Must be do with listener or directly in tileItemView ?
       var _layerItemModel = _layerItemView.model;
 
       var _nbTilesByRow = _layerItemModel.get('nbTilesByRow');

@@ -5,6 +5,9 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
+  	appEvents: {
+	    "app:handleComplete": "onRenderView"
+	  },
   	ViewItem: "",
 
 		initialize: function(options) {
@@ -13,12 +16,18 @@ define( [ "app" ], function( App ) {
 	    var ModelItem = new this.options.Model();
 	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
 
-	    this.listenTo(App, 'onHandleComplete', this.onRenderView);
+	    // Listeners
+	  	Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
 	  },
 
 	  onRenderView: function()
 	  {
 	  	this.ViewItem.render();
+	  },
+
+	  onReset: function()
+	  {
+	  	this.ViewItem.reset();
 	  }
 
   });

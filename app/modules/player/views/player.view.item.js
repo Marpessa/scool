@@ -19,7 +19,7 @@ define( [	"app" ], function( App ) {
 	  },
 
 	  _loadSpriteSheet: function() {
-	  	// Load Player Sprites
+	  	// Load Player Sprites // TODO Change variables in code to move into model
       var _data = {
         images: [App.queue.getResult( "player" )],
         frames: [

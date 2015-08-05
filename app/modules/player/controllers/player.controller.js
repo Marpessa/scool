@@ -8,13 +8,12 @@ define( [
 
   return Backbone.Marionette.Object.extend({
 
-  	ViewItem: "",
-    finder: "",
-
     collectionEvents: {
 	    "tile:collectionView:click": "onMove",
 	    "tile:collectionView:render": "onRenderView"
 	  },
+  	ViewItem: "",
+    finder: "",
 
 		initialize: function(options) {
 	    this.options = options;

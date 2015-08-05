@@ -11,6 +11,12 @@ define( [
 
   var App = new Backbone.Marionette.Application();
   App.version = "0.1";
+  App.env = "dev";
+
+  App.triggerMethods = {
+    'appHandleProgress': 'app:handleProgress',
+    'appHandleComplete': 'app:handleComplete'
+  };
 
   var currentModule;
 
@@ -37,13 +43,14 @@ define( [
     this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
     var LoaderViewItem = this.options.LoaderModule.ControllerItem.ViewItem;
+    var GameViewItem = this.options.GameModule.ControllerItem.ViewItem;
     var LayerViewCollection = this.options.LayerModule.ControllerItem.ViewCollection;
     // var TileViewCollection = this.options.TileModule.ControllerItem.ViewCollection;
     var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
 
-    // Listeners
+    // Listeners // TODO Use Backbone.Marionette.bindEntityEvents ?
     this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewRender, addChild);
-    this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewReset, removeChild);
+    this.listenTo(GameViewItem, GameViewItem.triggerMethods.gameItemViewRender, removeChild);
     this.listenTo(LayerViewCollection, LayerViewCollection.triggerMethods.layerCollectionViewRender, addChild);
     // this.listenTo(TileViewCollection, TileViewCollection.triggerMethods.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
     this.listenTo(PlayerViewItem, PlayerViewItem.triggerMethods.playerItemViewRender, stageUpdate);
@@ -51,16 +58,16 @@ define( [
     function handleProgress(_this) {
       console.info( "Loading..." );
       
-      App.triggerMethod('onHandleProgress');
       stageUpdate();
+      App.triggerMethod(App.triggerMethods.appHandleProgress, App);
     }
 
     function handleComplete(_this) {
       console.info( "Load Complete" );
       App.options.LoaderModule.stop();
 
-      App.triggerMethod('onHandleComplete');
       stageUpdate();
+      App.triggerMethod(App.triggerMethods.appHandleComplete, App);
     }
 
     function addChild(elt) {

@@ -5,18 +5,24 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.Object.extend({
 
+  	appEvents: {
+	    "app:handleProgress": "onRenderView"
+	  },
   	ViewItem: "",
 
 		initialize: function(options) {
-	    var ModelItem = new options.Model();
-	    this.ViewItem = new options.ItemView({ model: ModelItem });
+			this.options = options;
 
-	    this.listenTo(App, 'onHandleProgress', this.onRenderView);
+	    var ModelItem = new this.options.Model();
+	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
+
+	    // Listeners
+	  	Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
 	  },
 
-	  onRenderView: function()
+	  onRenderView: function(App)
 	  {
-	  	this.ViewItem.render();
+	  	this.ViewItem.render(App);
 	  },
 
 	  onReset: function()

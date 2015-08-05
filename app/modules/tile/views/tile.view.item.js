@@ -18,7 +18,7 @@ define( [ "app" ], function( App ) {
     },
 
     _loadSpriteSheet: function() {
-      // Load Tiles Sprites
+      // Load Tiles Sprites // TODO Change variables in code to move into model
       var _data = {
         images: [App.queue.getResult( "map_0_0" )],
         frames: [
@@ -73,15 +73,16 @@ define( [ "app" ], function( App ) {
       // Event click on one tile
       _sprite.on("click", function(event){ this.click(event, _sprite); }.bind(this) );
 
-      // --- DEV ---
-      if( this.model.get( 'visible' ) == true ) {
-        var text = new createjs.Text("[" + this.model.get( 'posX' ) + " - " + this.model.get( 'posY' ) + "]", "12px Arial", "#000");
-        text.x = this.model.get( 'posX' ) + this.model.get( 'width' )/3;
-        text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
-        text.textBaseline = "alphabetic";
+      if( App.env == "dev") {
+        if( this.model.get( 'visible' ) == true ) {
+          var text = new createjs.Text("[" + this.model.get( 'posX' ) + " - " + this.model.get( 'posY' ) + "]", "12px Arial", "#000");
+          text.x = this.model.get( 'posX' ) + this.model.get( 'width' )/3;
+          text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
+          text.textBaseline = "alphabetic";
 
-        if( _layerContent ) {
-          _layerContent.addChild(text);
+          if( _layerContent ) {
+            _layerContent.addChild(text);
+          }
         }
       }
 	  },

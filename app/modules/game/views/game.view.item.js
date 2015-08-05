@@ -9,8 +9,6 @@ define( [ "app" ], function( App ) {
       'gameItemViewRender': 'game:itemView:render'
     },
   	id: 'game',
-  	tileSpriteSheet: "",
-    playerSpriteSheet: "",
 
   	initialize: function(options) {
 	  },

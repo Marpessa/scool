@@ -12,7 +12,7 @@ define( [
   	layerIndex: 0,
 
   	url: function () {
-      return "http://dev.scool.com/rest/map_0_0/layer_" + this.layerIndex + "_tiles.json?v=" + App.version;
+      return "http://dev.scool.com/rest/map_0_0/layer_" + this.layerIndex + "_tiles.json?v=" + App.version; // TODO ID Map to change
     },
 
   	setLayerIndex: function(layerIndex) {
