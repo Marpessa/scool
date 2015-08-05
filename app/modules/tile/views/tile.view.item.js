@@ -66,6 +66,7 @@ define( [ "app" ], function( App ) {
       _sprite.y = this.model.get( 'posY' );
       _sprite.alpha = this.model.get( 'alpha' );
       _sprite.visible = this.model.get( 'visible' );
+      _sprite.cursor = "pointer";
 
       var _layerContent = this.model.get('layerContent');
       if( _layerContent ) {
