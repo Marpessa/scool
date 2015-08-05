@@ -40,7 +40,9 @@ define( [
   });
 
   Tile.on("start", function() {
-    console.info( "Tile > start" );
+    if( App.env == "dev") {
+      console.info( "Tile > start" );
+    }
   });
 
 

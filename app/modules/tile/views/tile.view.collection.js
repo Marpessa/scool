@@ -8,7 +8,7 @@ define( [
 
   return Backbone.Marionette.CollectionView.extend({
 
-    triggerMethods: {
+    triggers: {
       'tileCollectionViewRender': 'tile:collectionView:render',
       'tileCollectionViewClick': 'tile:collectionView:click',
     },
@@ -17,10 +17,11 @@ define( [
 
     childEvents: {
       'tile:itemView:render': function (childItem) {
-        this.triggerMethod(this.triggerMethods.tileCollectionViewRender, childItem);
+        this.triggerMethod(this.triggers.tileCollectionViewRender, childItem);
       },
       'tile:itemView:click': function (childItem) {
-        this.triggerMethod(this.triggerMethods.tileCollectionViewClick, childItem);
+        console.info("test");
+        this.triggerMethod(this.triggers.tileCollectionViewClick, childItem);
       }
     },
 

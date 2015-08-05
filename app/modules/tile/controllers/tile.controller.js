@@ -35,7 +35,9 @@ define( [ "app" ], function( App ) {
       this.Collection.fetch({
         dataType: 'json',
         success: function(collection, response, options) {
-          console.info("[Tile.controller.js] JSON file load was successful");
+          if( App.env == "dev") {
+            console.info("[Tile.controller.js] JSON file load was successful");
+          }
 
           _this.onRenderView( _layerItemView, collection );
         },

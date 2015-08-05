@@ -5,7 +5,7 @@ define( [	"app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-    triggerMethods: {
+    triggers: {
       'playerItemViewRender': 'player:itemView:render'
     },
     content: "",
@@ -39,7 +39,7 @@ define( [	"app" ], function( App ) {
 	  render: function () {
 	  	this._loadSpriteSheet();
 	  	this.renderPlayer();
-      this.triggerMethod(this.triggerMethods.playerItemViewRender, this);
+      this.triggerMethod(this.triggers.playerItemViewRender, this);
     },
 
     renderPlayer: function() {

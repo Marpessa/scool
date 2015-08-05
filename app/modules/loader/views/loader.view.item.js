@@ -5,7 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-    triggerMethods: {
+    triggers: {
       'loaderItemViewRender': 'loader:itemView:render',
       'loaderItemViewReset': 'loader:itemView:reset'
     },
@@ -55,11 +55,11 @@ define( [ "app" ], function( App ) {
                                 progressPoint, 
                                 this.model.get('progressBarHeight'));
 
-      this.triggerMethod(this.triggerMethods.loaderItemViewRender, this);
+      this.triggerMethod(this.triggers.loaderItemViewRender, this);
     },
 
     reset: function(App) {
-      this.triggerMethod(this.triggerMethods.loaderItemViewReset, this);
+      this.triggerMethod(this.triggers.loaderItemViewReset, this);
     }
 
   });

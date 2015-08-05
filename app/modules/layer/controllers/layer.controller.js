@@ -29,7 +29,9 @@ define( [ "app" ], function( App ) {
 	    this.Collection.fetch({
 	    	dataType: 'json',
 	    	success: function(collection, response, options) {
-        	console.info("[Layer.controller.js] JSON file load was successful");
+	    		if( App.env == "dev") {
+        		console.info("[Layer.controller.js] JSON file load was successful");
+        	}
 
         	_this.ViewCollection.render();
 		    },

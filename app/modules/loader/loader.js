@@ -39,7 +39,9 @@ define( [
   });
 
   Loader.on("start", function() {
-    console.info( "Loader > start" );
+    if( App.env == "dev") {
+      console.info( "Loader > start" );
+    }
   });
 
 

@@ -8,7 +8,7 @@ define( [
 
   return Backbone.Marionette.CollectionView.extend({
 
-    triggerMethods: {
+    triggers: {
       'layerCollectionViewRender': 'layer:collectionView:render'
     },
   	childView: ItemView,
@@ -16,7 +16,7 @@ define( [
 
     childEvents: {
       'layer:itemView:render': function (childItem) {
-        this.triggerMethod(this.triggerMethods.layerCollectionViewRender, childItem);
+        this.triggerMethod(this.triggers.layerCollectionViewRender, childItem);
       }
     },
 

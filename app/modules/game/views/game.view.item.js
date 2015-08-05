@@ -5,7 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-  	triggerMethods: {
+  	triggers: {
       'gameItemViewRender': 'game:itemView:render'
     },
   	id: 'game',
@@ -14,7 +14,7 @@ define( [ "app" ], function( App ) {
 	  },
 
 	  render: function () {
-	  	this.triggerMethod(this.triggerMethods.gameItemViewRender, this);
+	  	this.triggerMethod(this.triggers.gameItemViewRender, this);
 	  }
 
   });

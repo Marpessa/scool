@@ -10,10 +10,10 @@ define( [
   'use strict';
 
   var App = new Backbone.Marionette.Application();
+  App.env = "prod";
   App.version = "0.1";
-  App.env = "dev";
 
-  App.triggerMethods = {
+  App.triggers = {
     'appHandleProgress': 'app:handleProgress',
     'appHandleComplete': 'app:handleComplete'
   };
@@ -49,25 +49,30 @@ define( [
     var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
 
     // Listeners // TODO Use Backbone.Marionette.bindEntityEvents ?
-    this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewRender, addChild);
-    this.listenTo(GameViewItem, GameViewItem.triggerMethods.gameItemViewRender, removeChild);
-    this.listenTo(LayerViewCollection, LayerViewCollection.triggerMethods.layerCollectionViewRender, addChild);
-    // this.listenTo(TileViewCollection, TileViewCollection.triggerMethods.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
-    this.listenTo(PlayerViewItem, PlayerViewItem.triggerMethods.playerItemViewRender, stageUpdate);
+    this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewRender, addChild);
+    this.listenTo(GameViewItem, GameViewItem.triggers.gameItemViewRender, removeChild);
+    this.listenTo(LayerViewCollection, LayerViewCollection.triggers.layerCollectionViewRender, addChild);
+    // this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
+    this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRender, stageUpdate);
 
     function handleProgress(_this) {
-      console.info( "Loading..." );
+      if( App.env == "dev") {
+        console.info( "Loading..." );
+      }
       
       stageUpdate();
-      App.triggerMethod(App.triggerMethods.appHandleProgress, App);
+      App.triggerMethod(App.triggers.appHandleProgress, App);
     }
 
     function handleComplete(_this) {
-      console.info( "Load Complete" );
+      if( App.env == "dev") {
+        console.info( "Load Complete" );
+      }
+
       App.options.LoaderModule.stop();
 
       stageUpdate();
-      App.triggerMethod(App.triggerMethods.appHandleComplete, App);
+      App.triggerMethod(App.triggers.appHandleComplete, App);
     }
 
     function addChild(elt) {

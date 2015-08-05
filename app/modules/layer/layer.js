@@ -38,7 +38,9 @@ define( [
   });
 
   Layer.on("start", function() {
-    console.info( "Layer > start" );
+    if( App.env == "dev") {
+      console.info( "Layer > start" );
+    }
   });
 
 

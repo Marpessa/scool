@@ -39,7 +39,9 @@ define( [
   });
 
   Player.on("start", function() {
-    console.info( "Player > start" );
+    if( App.env == "dev") {
+      console.info( "Player > start" );
+    }
   });
 
   return Player;

@@ -5,7 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
-    triggerMethods: {
+    triggers: {
       'tileItemViewRender': 'tile:itemView:render',
       'tileItemViewClick': 'tile:itemView:click'
     },
@@ -15,6 +15,7 @@ define( [ "app" ], function( App ) {
     },
 
     initialize: function (options) {
+      this.options = options;
     },
 
     _loadSpriteSheet: function() {
@@ -53,7 +54,7 @@ define( [ "app" ], function( App ) {
       this._loadSpriteSheet();
       this.renderTile();
 
-      this.triggerMethod(this.triggerMethods.tileItemViewRender, this);
+      this.triggerMethod(this.triggers.tileItemViewRender, this);
     },
 
 	  renderTile: function () {
@@ -71,7 +72,9 @@ define( [ "app" ], function( App ) {
       }
 
       // Event click on one tile
-      _sprite.on("click", function(event){ this.click(event, _sprite); }.bind(this) );
+      _sprite.on("click", function(event) {
+        this.click(event, _sprite);
+      }.bind(this) );
 
       if( App.env == "dev") {
         if( this.model.get( 'visible' ) == true ) {
@@ -90,7 +93,7 @@ define( [ "app" ], function( App ) {
     click: function (event, _sprite) {
       console.info( "[" + _sprite.x + " - " + _sprite.y + "]" );
 
-      this.triggerMethod(this.triggerMethods.tileItemViewClick, this);
+      this.triggerMethod(this.triggers.tileItemViewClick, this);
     }
 
   });
