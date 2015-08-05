@@ -38,15 +38,14 @@ define( [
 
     var LoaderViewItem = this.options.LoaderModule.ControllerItem.ViewItem;
     var LayerViewCollection = this.options.LayerModule.ControllerItem.ViewCollection;
+    // var TileViewCollection = this.options.TileModule.ControllerItem.ViewCollection;
     var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
-
-    // console.info( LayerViewItem );
 
     // Listeners
     this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewRender, addChild);
     this.listenTo(LoaderViewItem, LoaderViewItem.triggerMethods.loaderItemViewReset, removeChild);
     this.listenTo(LayerViewCollection, LayerViewCollection.triggerMethods.layerCollectionViewRender, addChild);
-    // this.listenTo(this.options.TileModule.ControllerItem.ViewCollection, 'tile:collectionView:render', stageUpdate); // TODO
+    // this.listenTo(TileViewCollection, TileViewCollection.triggerMethods.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
     this.listenTo(PlayerViewItem, PlayerViewItem.triggerMethods.playerItemViewRender, stageUpdate);
 
     function handleProgress(_this) {
