@@ -5,17 +5,16 @@ define( [	"app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    template: false,
     triggers: {
       'playerItemViewRender': 'player:itemView:render'
     },
-    content: "",
-    playerSpriteSheet: "",
-
-  	attributes : function() {
+    ui: {
+      playerSpriteSheet: "",
     },
 
   	initialize: function(options) {
-      this.content = new createjs.Container();
+      // this.ui.content = new createjs.Container();
 	  },
 
 	  _loadSpriteSheet: function() {
@@ -33,7 +32,7 @@ define( [	"app" ], function( App ) {
         }
       };
       
-      this.playerSpriteSheet = new createjs.SpriteSheet(_data);
+      this.ui.playerSpriteSheet = new createjs.SpriteSheet(_data);
 	  },
 
 	  render: function () {
@@ -43,7 +42,7 @@ define( [	"app" ], function( App ) {
     },
 
     renderPlayer: function() {
-      var _sprite = new createjs.Sprite(this.playerSpriteSheet);
+      var _sprite = new createjs.Sprite(this.ui.playerSpriteSheet);
       _sprite.gotoAndStop( this.model.get('frameId') );
 
       _sprite.x = this.model.get( 'posX' );

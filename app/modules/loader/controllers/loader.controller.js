@@ -11,10 +11,8 @@ define( [ "app" ], function( App ) {
   	ViewItem: "",
 
 		initialize: function(options) {
-			this.options = options;
-
-	    var ModelItem = new this.options.Model();
-	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
+	    var ModelItem = new options.Model();
+	    this.ViewItem = new options.ItemView({ model: ModelItem });
 
 	    // Listeners
 	  	Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);

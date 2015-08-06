@@ -5,17 +5,19 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    template: false,
     triggers: {
       'tileItemViewRender': 'tile:itemView:render',
-      'tileItemViewClick': 'tile:itemView:click'
+      'tileItemViewClick': 'tile:itemView:click',
+      'tileItemViewMouseOver': 'tile:itemView:mouseover',
+      'tileItemViewMouseOut': 'tile:itemView:mouseout'
     },
-    tileSpriteSheet: "",
-
-    attributes : function() {
+    ui: {
+      sprite: "",
+      tileSpriteSheet: "",
     },
 
     initialize: function (options) {
-      this.options = options;
     },
 
     _loadSpriteSheet: function() {
@@ -47,7 +49,7 @@ define( [ "app" ], function( App ) {
         }
       };
       
-      this.tileSpriteSheet = new createjs.SpriteSheet(_data);
+      this.ui.tileSpriteSheet = new createjs.SpriteSheet(_data);
     },
 
     render: function () {
@@ -59,33 +61,34 @@ define( [ "app" ], function( App ) {
 
     renderTile: function () {
 
-      var _sprite = new createjs.Sprite(this.tileSpriteSheet);
-      _sprite.gotoAndStop( this.model.get('frameId') );
+      this.ui.sprite = new createjs.Sprite(this.ui.tileSpriteSheet);
+      this.ui.sprite.gotoAndStop( this.model.get('frameId') );
 
-      _sprite.x = this.model.get( 'posX' );
-      _sprite.y = this.model.get( 'posY' );
-      _sprite.alpha = this.model.get( 'alpha' );
-      _sprite.visible = this.model.get( 'visible' );
-      _sprite.cursor = "pointer";
+      this.ui.sprite.x = this.model.get( 'posX' );
+      this.ui.sprite.y = this.model.get( 'posY' );
+      this.ui.sprite.alpha = this.model.get( 'alpha' );
+      this.ui.sprite.visible = this.model.get( 'visible' );
+      this.ui.sprite.cursor = "pointer";
 
       var _layerContent = this.model.get('layerContent');
+      
       if( _layerContent ) {
-        _layerContent.addChild(_sprite);
+        _layerContent.addChild(this.ui.sprite);
       }
 
       // Event click on one tile
-      _sprite.on("click", function(event) {
-        this.click(event, _sprite);
+      this.ui.sprite.on("click", function(event) {
+        this.click(event, this.ui.sprite);
       }.bind(this) );
 
       // Event mouserover on one tile
-      _sprite.on("mouseover", function(event) {
-        this.mouseover(event, _sprite);
+      this.ui.sprite.on("mouseover", function(event) {
+        this.mouseover(event, this.ui.sprite);
       }.bind(this) );
 
       // Event mouserover on one tile
-      _sprite.on("mouseout", function(event) {
-        this.mouseout(event, _sprite);
+      this.ui.sprite.on("mouseout", function(event) {
+        this.mouseout(event, this.ui.sprite);
       }.bind(this) );
 
       if( App.env == "dev") {
@@ -111,12 +114,15 @@ define( [ "app" ], function( App ) {
     mouseover: function(event, _sprite) {
       // TODO
       _sprite.alpha = 0.8;
+
+      this.triggerMethod(this.triggers.tileItemViewMouseOver, this);
       App.stage.update();
     },
 
     mouseout: function(event, _sprite) {
       // TODO
       _sprite.alpha = 1;
+      this.triggerMethod(this.triggers.tileItemViewMouseOut, this);
       App.stage.update();
     }
 

@@ -16,17 +16,16 @@ define( [
     finder: "",
 
 		initialize: function(options) {
-	    this.options = options;
 
 	    this.finder = new PF.AStarFinder({
 		    allowDiagonal: true
 		  });
 
-	    var ModelItem = new this.options.Model();
-	    this.ViewItem = new this.options.ItemView({ model: ModelItem });
+	    var ModelItem = new options.Model();
+	    this.ViewItem = new options.ItemView({ model: ModelItem });
 
-      var GameModule = this.options.Modules.GameModule;
-      var TileModule = this.options.Modules.TileModule;
+      var GameModule = options.Modules.GameModule;
+      var TileModule = options.Modules.TileModule;
 
 	  	// Listeners
 	  	Backbone.Marionette.bindEntityEvents(this, TileModule.ControllerItem.ViewCollection, this.collectionEvents);

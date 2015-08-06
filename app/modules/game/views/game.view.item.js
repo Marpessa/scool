@@ -5,6 +5,7 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    template: false,
   	triggers: {
       'gameItemViewRender': 'game:itemView:render'
     },

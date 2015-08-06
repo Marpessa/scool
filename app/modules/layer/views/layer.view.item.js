@@ -5,13 +5,13 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Marionette.ItemView.extend({
 
+    template: false,
     triggers: {
       'layerItemViewRender': 'layer:itemView:render'
     },
-    content: "",
-
-    attributes : function() {
+    ui: {
     },
+    content: "",
 
   	initialize: function(options) {
       this.content = new createjs.Container();

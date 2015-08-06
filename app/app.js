@@ -77,11 +77,19 @@ define( [
     }
 
     function addChild(elt) {
-      App.stage.addChild(elt.content);
+      if( elt.content ) {
+        App.stage.addChild(elt.content);
+      } else {
+        console.error( "App > addChild >>> elt.ui.content is not defined" );
+      }
     }
 
     function removeChild(elt) {
-      App.stage.removeChild(elt.content);
+      if( elt.content ) {
+        App.stage.removeChild(elt.content);
+      } else {
+        console.error( "App > removeChild >>> elt.ui.content is not defined" );
+      }
     }
 
     function stageUpdate() {

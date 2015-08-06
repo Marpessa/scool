@@ -13,12 +13,10 @@ define( [ "app" ], function( App ) {
 	  },
 
 		initialize: function(options) {
-			this.options = options;
-
 	    var GameModule = options.Modules.GameModule;
 
-	    this.Collection = new this.options.Collection();
-	    this.ViewCollection = new this.options.CollectionView({ Collection: this.Collection });
+	    this.Collection = new options.Collection();
+	    this.ViewCollection = new options.CollectionView({ Collection: this.Collection });
 	    // Listeners
 	    Backbone.Marionette.bindEntityEvents(this, GameModule.ControllerItem.ViewItem, this.itemEvents);
 	  },

@@ -11,6 +11,8 @@ define( [
     triggers: {
       'tileCollectionViewRender': 'tile:collectionView:render',
       'tileCollectionViewClick': 'tile:collectionView:click',
+      'tileCollectionViewMouseOver': 'tile:collectionView:mouseover',
+      'tileCollectionViewMouseOut': 'tile:collectionView:mouseout',
     },
   	childView: ItemView,
   	collection: "",
@@ -20,18 +22,16 @@ define( [
         this.triggerMethod(this.triggers.tileCollectionViewRender, childItem);
       },
       'tile:itemView:click': function (childItem) {
-        console.info("collection click ok");
         this.triggerMethod(this.triggers.tileCollectionViewClick, childItem);
+      },
+      'tile:itemView:mouseover': function (childItem) {
+        this.triggerMethod(this.triggers.tileCollectionViewMouseOver, childItem);
       }
     },
 
   	initialize: function(options) {
 	    this.collection = options.Collection;
 	  },
-
-    test: function() {
-      console.info( "tet" );
-    },
 
     getChildView: function(item) {
       return ItemView;
