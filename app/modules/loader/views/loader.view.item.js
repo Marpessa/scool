@@ -22,27 +22,24 @@ define( [ "app" ], function( App ) {
       this.ui.loadProgressLabel.x = this.model.get('loadProgressLabelPosX');
       this.ui.loadProgressLabel.y = this.model.get('loadProgressLabelPosY');
 
-      var progressBarContainer = new createjs.Graphics();
-      progressBarContainer.beginFill("#000000");
-      progressBarContainer.drawRect(this.model.get('progressBarContainerPosX'),
-                                    this.model.get('progressBarContainerPosY'),
-                                    this.model.get('progressBarContainerWidth'),
-                                    this.model.get('progressBarContainerHeight'));
+      var progressBarContainer = new createjs.Shape();
+      progressBarContainer.graphics.beginFill("#000000");
+      progressBarContainer.graphics.drawRect(this.model.get('progressBarContainerPosX'),
+                                             this.model.get('progressBarContainerPosY'),
+                                             this.model.get('progressBarContainerWidth'),
+                                             this.model.get('progressBarContainerHeight'));
 
-      this.ui.progressBar = new createjs.Graphics();
-      this.ui.progressBar.beginFill("#cccccc");
-      this.ui.progressBar.drawRect(this.model.get('progressBarPosX'),
-                                this.model.get('progressBarPosY'),
-                                this.model.get('progressBarWidth'),
-                                this.model.get('progressBarHeight'));
-      
-      var progressBarContainerShape = new createjs.Shape(progressBarContainer);
-      var progressBarShape = new createjs.Shape(this.ui.progressBar);
+      this.ui.progressBar = new createjs.Shape();
+      this.ui.progressBar.graphics.beginFill("#cccccc");
+      this.ui.progressBar.graphics.drawRect(this.model.get('progressBarPosX'),
+                                            this.model.get('progressBarPosY'),
+                                            this.model.get('progressBarWidth'),
+                                            this.model.get('progressBarHeight'));
 
       this.content = new createjs.Container();
       this.content.addChild(this.ui.loadProgressLabel);
-      this.content.addChild(progressBarContainerShape);
-      this.content.addChild(progressBarShape);
+      this.content.addChild(progressBarContainer);
+      this.content.addChild(this.ui.progressBar);
     },
 
     render: function (App) {
@@ -50,10 +47,10 @@ define( [ "app" ], function( App ) {
 
       var progressPoint = App.queue.progress * this.model.get('progressBarMaxWidth');
 
-      this.ui.progressBar.drawRect(this.model.get('progressBarPosX'),
-                                this.model.get('progressBarPosY'),
-                                progressPoint, 
-                                this.model.get('progressBarHeight'));
+      this.ui.progressBar.graphics.drawRect(this.model.get('progressBarPosX'),
+                                            this.model.get('progressBarPosY'),
+                                            progressPoint, 
+                                            this.model.get('progressBarHeight'));
 
       this.triggerMethod(this.triggers.loaderItemViewRender, this);
     },

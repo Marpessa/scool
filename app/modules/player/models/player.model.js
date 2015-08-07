@@ -9,16 +9,16 @@ define( [ "app" ], function( App ) {
     	return  {
     		        layerContent: "",
     		        mapPlayerSpriteSheet: "",
-    		        baseLayerIndex: 2,
-    		        baseTileIndexX: 6,
-    		        baseTileIndexY: 8,
+    		        baseLayerIndex: 0,
+    		        baseTileIndexX: 2,
+    		        baseTileIndexY: 2,
     		        frameId: 0,
 								width: 100,
 						    height: 50,
 						    posX: 0,
 	              posY: 0,
-	              decX: 25,
-	              decY: 40,
+	              decX: 5,
+	              decY: 38,
                 alpha: 1,
                 visible: true
 							}

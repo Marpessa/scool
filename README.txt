@@ -7,3 +7,8 @@ Mettre à jour les controlleurs et les vues avec bindEntityEvents pour que ce so
 La vue instancie TriggerMethod et ce sont les controlleurs des autres modules qui écoutent.
 
 // http://fr.livingtuts.com/illustrator/illustration-3d-isometrique-bases-et-techniques-avancees/
+
+
+TODO :
+Mettre l'attribut "content" dans "ui" mais bug pour les layers // Mettre sprite dans "ui" pour TileView mais bug aussi
+Click event fonctionne seulement sur le layer le plus élevé

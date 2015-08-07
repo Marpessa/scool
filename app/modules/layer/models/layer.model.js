@@ -9,7 +9,7 @@ define( [ "app" ], function( App ) {
     	return {
     						index: 0,
 		            width: 1200,
-		            height: 480,
+		            //height: 480,
 		            tileWidth: 100,
 		            tileHeight: 50,
 		            posX : 0,

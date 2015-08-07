@@ -37,7 +37,7 @@ define( [
     this.options.PlayerModule.start();
 
     var _manifest = [
-      {id: "map_0_0", src:"sprite0.png"},
+      {id: "map_0_0", src:"sprite1.png"},
       {id: "player", src:"player0.png"}
     ];
 
@@ -46,14 +46,16 @@ define( [
     var LoaderViewItem = this.options.LoaderModule.ControllerItem.ViewItem;
     var GameViewItem = this.options.GameModule.ControllerItem.ViewItem;
     var LayerViewCollection = this.options.LayerModule.ControllerItem.ViewCollection;
-    // var TileViewCollection = this.options.TileModule.ControllerItem.ViewCollection;
+    var TileViewCollection = this.options.TileModule.ControllerItem.ViewCollection;
     var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
 
     // Listeners // TODO Use Backbone.Marionette.bindEntityEvents ?
     this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewRender, addChild);
     this.listenTo(GameViewItem, GameViewItem.triggers.gameItemViewRender, removeChild);
     this.listenTo(LayerViewCollection, LayerViewCollection.triggers.layerCollectionViewRender, addChild);
-    // this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
+    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
+    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOver, stageUpdate);
+    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOut, stageUpdate);
     this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRender, stageUpdate);
 
     function handleProgress(_this) {

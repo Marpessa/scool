@@ -26,6 +26,9 @@ define( [
       },
       'tile:itemView:mouseover': function (childItem) {
         this.triggerMethod(this.triggers.tileCollectionViewMouseOver, childItem);
+      },
+      'tile:itemView:mouseout': function (childItem) {
+        this.triggerMethod(this.triggers.tileCollectionViewMouseOut, childItem);
       }
     },
 
