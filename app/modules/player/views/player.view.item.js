@@ -7,14 +7,16 @@ define( [	"app" ], function( App ) {
 
     template: false,
     triggers: {
-      'playerItemViewRender': 'player:itemView:render'
+      'playerItemViewRender': 'player:itemView:render',
+      'playerItemViewAddChild': 'player:itemView:addchild'
     },
     ui: {
       playerSpriteSheet: "",
     },
+    content: "",
 
   	initialize: function(options) {
-      // this.ui.content = new createjs.Container();
+      this.content = new createjs.Container();
 	  },
 
 	  _loadSpriteSheet: function() {
@@ -50,8 +52,9 @@ define( [	"app" ], function( App ) {
       _sprite.alpha = this.model.get( 'alpha' );
       _sprite.visible = this.model.get( 'visible' );
 
-      var _layerContent = this.model.get('layerContent');
-      _layerContent.addChild(_sprite);
+      this.content.addChild(_sprite);
+
+      this.triggerMethod(this.triggers.playerItemViewAddChild, this);
 	  }
 
   });

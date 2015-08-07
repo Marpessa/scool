@@ -36,9 +36,9 @@ define( [
 	  	if(_tileItemModel.get( 'layerIndex' ) == this.ViewItem.model.get('baseLayerIndex')
 	  		&& _tileItemModel.get( 'indexX' ) == this.ViewItem.model.get('baseTileIndexX')
 	  		&&  _tileItemModel.get( 'indexY' ) == this.ViewItem.model.get('baseTileIndexY')) {
+
 	  		this.ViewItem.model.set('posX', _tileItemModel.get( 'posX' ) + this.ViewItem.model.get('decX'));
 	  		this.ViewItem.model.set('posY', _tileItemModel.get( 'posY' ) - this.ViewItem.model.get('decY'));
-		  	this.ViewItem.model.set('layerContent', _tileItemModel.get('layerContent'));
 		  	this.ViewItem.render();
 	  	}
 	  },

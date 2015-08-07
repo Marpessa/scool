@@ -5,10 +5,11 @@ define( [ "app" ], function( App ) {
 
   return Backbone.Model.extend({ 
 
+    frameId: 0,
+
   	defaults : function() {
       return {
-                layerIndex: "",
-      					layerContent: "",
+                layerIndex: 0,
                 gameTileSpriteSheet: "",
                 frameId: 0,
                 width: 0,
@@ -33,8 +34,7 @@ define( [ "app" ], function( App ) {
       {
         this.set('visible', false);
       }
-
-      this.frameId = 'frame_' + this.frameId;
+      this.frameId = 'frame_' + options.frameId;
 		}
 
   });

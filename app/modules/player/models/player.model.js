@@ -7,7 +7,6 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
     	return  {
-    		        layerContent: "",
     		        mapPlayerSpriteSheet: "",
     		        baseLayerIndex: 0,
     		        baseTileIndexX: 2,

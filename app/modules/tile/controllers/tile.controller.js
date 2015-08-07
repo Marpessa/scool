@@ -36,7 +36,6 @@ define( [ "app" ], function( App ) {
           if( App.env == "dev") {
             console.info("[Tile.controller.js] JSON file load was successful");
           }
-
           _this.onRenderView( _layerItemView, collection );
         },
 
@@ -49,6 +48,7 @@ define( [ "app" ], function( App ) {
     onRenderView: function(_layerItemView, collection) {
       // TODO Must be do with listener or directly in tileItemView ?
       var _layerItemModel = _layerItemView.model;
+
 
       var _nbTilesByRow = _layerItemModel.get('nbTilesByRow');
       var _nbTiles = collection.length;
@@ -67,8 +67,10 @@ define( [ "app" ], function( App ) {
         var _width = _layerItemModel.get('tileWidth');
         var _height = _layerItemModel.get('tileHeight');
 
-        var _posX = (_indexY-_indexX) * _width/2;
-        var _posY = (_indexX+_indexY) * _height/2;
+        var _posX = (_indexY-_indexX) * _width/2 + _layerItemModel.get( 'posX' );
+        var _posY = (_indexX+_indexY) * _height/2 + _layerItemModel.get( 'posY' ) + _layerItemModel.get( 'posZ' );
+
+        collection.layerIndex = _layerItemModel.get("index"); // TODO Fixed Bug but strange...
 
         collection.models[i].set('indexX', _indexX);
         collection.models[i].set('indexY', _indexY);
@@ -77,8 +79,6 @@ define( [ "app" ], function( App ) {
         collection.models[i].set('posX', _posX);
         collection.models[i].set('posY', _posY);
         collection.models[i].set('layerIndex', _layerItemModel.get("index"));
-
-        collection.models[i].set('layerContent', _layerItemView.getContent());
 
         // All tiles loaded / Render View
         if( i == _nbTiles-1 ) {

@@ -8,18 +8,12 @@ define( [
 
   return Backbone.Marionette.CollectionView.extend({
 
-    triggers: {
-      'tileCollectionViewRender': 'tile:collectionView:render',
-      'tileCollectionViewClick': 'tile:collectionView:click',
-      'tileCollectionViewMouseOver': 'tile:collectionView:mouseover',
-      'tileCollectionViewMouseOut': 'tile:collectionView:mouseout',
-    },
-  	childView: ItemView,
-  	collection: "",
-
     childEvents: {
       'tile:itemView:render': function (childItem) {
         this.triggerMethod(this.triggers.tileCollectionViewRender, childItem);
+      },
+      'tile:itemView:addchild': function (childItem) {
+        this.triggerMethod(this.triggers.tileItemViewAddChild, childItem);
       },
       'tile:itemView:click': function (childItem) {
         this.triggerMethod(this.triggers.tileCollectionViewClick, childItem);
@@ -31,6 +25,16 @@ define( [
         this.triggerMethod(this.triggers.tileCollectionViewMouseOut, childItem);
       }
     },
+    triggers: {
+      'tileCollectionViewRender': 'tile:collectionView:render',
+      'tileItemViewAddChild': 'tile:collectionView:addchild',
+      'tileCollectionViewClick': 'tile:collectionView:click',
+      'tileCollectionViewMouseOver': 'tile:collectionView:mouseover',
+      'tileCollectionViewMouseOut': 'tile:collectionView:mouseout',
+    },
+    childView: ItemView,
+    collection: "",
+
 
   	initialize: function(options) {
 	    this.collection = options.Collection;

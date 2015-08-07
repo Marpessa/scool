@@ -8,6 +8,7 @@ define( [ "app" ], function( App ) {
     template: false,
     triggers: {
       'tileItemViewRender': 'tile:itemView:render',
+      'tileItemViewAddChild': 'tile:itemView:addchild',
       'tileItemViewClick': 'tile:itemView:click',
       'tileItemViewMouseOver': 'tile:itemView:mouseover',
       'tileItemViewMouseOut': 'tile:itemView:mouseout'
@@ -15,9 +16,10 @@ define( [ "app" ], function( App ) {
     ui: {
       tileSpriteSheet: "",
     },
-    sprite: "",
+    content: "",
 
     initialize: function (options) {
+      this.content = new createjs.Container();
     },
 
     _loadSpriteSheet: function() {
@@ -60,36 +62,31 @@ define( [ "app" ], function( App ) {
     },
 
     renderTile: function () {
+      var _sprite = new createjs.Sprite(this.ui.tileSpriteSheet);
+      _sprite.gotoAndStop( this.model.get('frameId') );
 
-      this.sprite = new createjs.Sprite(this.ui.tileSpriteSheet);
-      this.sprite.gotoAndStop( this.model.get('frameId') );
-
-      this.sprite.x = this.model.get( 'posX' );
-      this.sprite.y = this.model.get( 'posY' );
-      this.sprite.alpha = this.model.get( 'alpha' );
-      this.sprite.visible = this.model.get( 'visible' );
-      this.sprite.cursor = "pointer";
-
-      var _layerContent = this.model.get('layerContent');
-
-      if( _layerContent ) {
-        _layerContent.addChild(this.sprite);
-      }
+      _sprite.x = this.model.get( 'posX' );
+      _sprite.y = this.model.get( 'posY' );
+      _sprite.alpha = this.model.get( 'alpha' );
+      _sprite.visible = this.model.get( 'visible' );
+      _sprite.cursor = "pointer";
 
       // Event click on one tile
-      this.sprite.on("click", function(event) {
-        this.click(event, this);
+      _sprite.on("click", function(event) {
+        this.click(event, _sprite);
       }.bind(this) );
 
       // Event mouserover on one tile
-      this.sprite.on("mouseover", function(event) {
-        this.mouseover(event, this);
+      _sprite.on("mouseover", function(event) {
+        this.mouseover(event, _sprite);
       }.bind(this) );
 
       // Event mouserover on one tile
-      this.sprite.on("mouseout", function(event) {
-        this.mouseout(event, this);
+      _sprite.on("mouseout", function(event) {
+        this.mouseout(event, _sprite);
       }.bind(this) );
+
+      this.content.addChild(_sprite);
 
       if( App.env == "dev") {
         if( this.model.get( 'visible' ) == true ) {
@@ -98,30 +95,33 @@ define( [ "app" ], function( App ) {
           text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
           text.textBaseline = "alphabetic";
 
-          if( _layerContent && this.model.get('visible') ) {
-            _layerContent.addChild(text);
+          if(  this.model.get('visible') ) {
+            this.content.addChild(text);
           }
         }
       }
+
+
+      this.triggerMethod(this.triggers.tileItemViewAddChild, this);
 	  },
 
-    click: function (event, _this) {
-      console.info( "Click : [" + _this.sprite.x + " - " + _this.sprite.y + "]" );
+    click: function (event, _sprite) {
+      console.info( "Click : [" + _sprite.x + " - " + _sprite.y + "]" );
       this.triggerMethod(this.triggers.tileItemViewClick, this);
     },
 
-    mouseover: function(event, _this) {
-      _this.sprite.filters = [
+    mouseover: function(event, _sprite) {
+      _sprite.filters = [
         new createjs.ColorFilter(0, 0, 0, 1, 0, 155, 0)
       ];
-      _this.sprite.cache(0,0,100,100);
+      _sprite.cache(0,0,100,100);
 
       this.triggerMethod(this.triggers.tileItemViewMouseOver, this);
     },
 
-    mouseout: function(event, _this) {
-      _this.sprite.filters = [];
-      _this.sprite.cache(0,0,100,100);
+    mouseout: function(event, _sprite) {
+      _sprite.filters = [];
+      _sprite.cache(0,0,100,100);
 
       this.triggerMethod(this.triggers.tileItemViewMouseOut, this);
     }

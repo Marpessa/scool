@@ -8,17 +8,17 @@ define( [
 
   return Backbone.Marionette.CollectionView.extend({
 
-    triggers: {
-      'layerCollectionViewRender': 'layer:collectionView:render'
-    },
-  	childView: ItemView,
-  	collection: "",
-
     childEvents: {
       'layer:itemView:render': function (childItem) {
         this.triggerMethod(this.triggers.layerCollectionViewRender, childItem);
       }
     },
+    triggers: {
+      'layerCollectionViewRender': 'layer:collectionView:render'
+    },
+    childView: ItemView,
+    collection: "",
+
 
   	initialize: function(options) {
 	    this.collection = options.Collection;
