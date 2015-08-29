@@ -8,18 +8,18 @@ define( [ "app" ], function( App ) {
     template: false,
     triggers: {
       'tileItemViewRender': 'tile:itemView:render',
-      'tileItemViewAddChild': 'tile:itemView:addchild',
+      'tileItemViewRenderTile': 'tile:itemView:renderTile',
       'tileItemViewClick': 'tile:itemView:click',
       'tileItemViewMouseOver': 'tile:itemView:mouseover',
       'tileItemViewMouseOut': 'tile:itemView:mouseout'
     },
     ui: {
       tileSpriteSheet: "",
+      content: ""
     },
-    content: "",
 
     initialize: function (options) {
-      this.content = new createjs.Container();
+      this.ui.content = new createjs.Container();
     },
 
     _loadSpriteSheet: function() {
@@ -86,7 +86,7 @@ define( [ "app" ], function( App ) {
         this.mouseout(event, _sprite);
       }.bind(this) );
 
-      this.content.addChild(_sprite);
+      this.ui.content.addChild(_sprite);
 
       if( App.env == "dev") {
         if( this.model.get( 'visible' ) == true ) {
@@ -96,13 +96,13 @@ define( [ "app" ], function( App ) {
           text.textBaseline = "alphabetic";
 
           if(  this.model.get('visible') ) {
-            this.content.addChild(text);
+            this.ui.content.addChild(text);
           }
         }
       }
 
 
-      this.triggerMethod(this.triggers.tileItemViewAddChild, this);
+      this.triggerMethod(this.triggers.tileItemViewRenderTile, this);
 	  },
 
     click: function (event, _sprite) {

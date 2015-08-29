@@ -50,14 +50,14 @@ define( [
     var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
 
     // Listeners // TODO Use Backbone.Marionette.bindEntityEvents ?
-    this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewRender, addChild); // TODO Change the name of trigger into AddChild
-    this.listenTo(GameViewItem, GameViewItem.triggers.gameItemViewRender, removeChild); // TODO Change the name of trigger into RemoveChild
+    this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewRender, addChild);
+    this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewDestroy, removeChild);
     // this.listenTo(LayerViewCollection, LayerViewCollection.triggers.layerCollectionViewRender, addChild);
-    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileItemViewAddChild, addChild);
+    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileItemViewRenderTile, addChild);
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOver, stageUpdate);
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOut, stageUpdate);
-    this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewAddChild, addChild);
+    this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRenderPlayer, addChild);
     this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRender, stageUpdate);
 
     function handleProgress(_this) {
@@ -81,18 +81,19 @@ define( [
     }
 
     function addChild(elt) {
-      if( elt.content ) {
-        App.stage.addChild(elt.content);
+      if( elt.ui && elt.ui.content ) {
+        App.stage.addChild(elt.ui.content);
       } else {
-        console.error( "App > addChild >>> elt.content is not defined" );
+        console.error( "App > addChild >>> elt.ui.content is not defined" );
       }
     }
 
     function removeChild(elt) {
-      if( elt.content ) {
-        App.stage.removeChild(elt.content);
+      if( elt.ui && elt.ui.content ) {
+        App.stage.removeChild(elt.ui.content);
       } else {
-        console.error( "App > removeChild >>> elt.content is not defined" );
+        console.log( elt );
+        console.error( "App > removeChild >>> elt.ui.content is not defined" );
       }
     }
 

@@ -8,13 +8,14 @@ define( [ "app" ], function( App ) {
     template: false,
     triggers: {
       'loaderItemViewRender': 'loader:itemView:render',
-      'loaderItemViewReset': 'loader:itemView:reset'
+      'loaderItemViewReset': 'loader:itemView:reset',
+      'loaderItemViewDestroy': 'loader:itemView:destroy'
     },
     ui: {
       loadProgressLabel: "",
       progressBar: "",
+      content: "",
     },
-    content: "",
 
     initialize: function () {
       this.ui.loadProgressLabel = new createjs.Text("Chargement... 0%","18px Verdana","#000000");
@@ -36,14 +37,15 @@ define( [ "app" ], function( App ) {
                                             this.model.get('progressBarWidth'),
                                             this.model.get('progressBarHeight'));
 
-      this.content = new createjs.Container();
-      this.content.addChild(this.ui.loadProgressLabel);
-      this.content.addChild(progressBarContainer);
-      this.content.addChild(this.ui.progressBar);
+      this.ui.content = new createjs.Container();
+      this.ui.content.addChild(this.ui.loadProgressLabel);
+      this.ui.content.addChild(progressBarContainer);
+      this.ui.content.addChild(this.ui.progressBar);
     },
 
     render: function (App) {
-      this.ui.loadProgressLabel.text = "Chargement... " + Math.ceil(App.queue.progress*100) + "%";
+      var progressPercent =  Math.ceil(App.queue.progress*100);
+      this.ui.loadProgressLabel.text = "Chargement... " + progressPercent + "%";
 
       var progressPoint = App.queue.progress * this.model.get('progressBarMaxWidth');
 
@@ -57,6 +59,11 @@ define( [ "app" ], function( App ) {
 
     reset: function(App) {
       this.triggerMethod(this.triggers.loaderItemViewReset, this);
+    },
+
+    destroy: function(App) {
+      this.triggerMethod(this.triggers.loaderItemViewDestroy, this);
+      console.info("destroy");
     }
 
   });

@@ -6,7 +6,8 @@ define( [ "app" ], function( App ) {
   return Backbone.Marionette.Object.extend({
 
   	appEvents: {
-	    "app:handleProgress": "onRenderView"
+	    "app:handleProgress": "onRenderView",
+	    "app:handleComplete": "onDestroyView"
 	  },
   	ViewItem: "",
 
@@ -26,7 +27,12 @@ define( [ "app" ], function( App ) {
 	  onReset: function()
 	  {
 	  	this.ViewItem.reset();
-	  }
+	  },
+
+	  onDestroyView: function(App)
+	  {
+	  	this.ViewItem.destroy(App);
+	  },
 
   });
 

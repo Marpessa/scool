@@ -11,7 +11,5 @@ La vue instancie TriggerMethod et ce sont les controlleurs des autres modules qu
 
 TODO :
 
-
 GROS BUG : Des tiles sont chargés à partir de layer qui n'existe pas. Icompréhensible. (LayerIndex : 0; Tile Pos X et Y : 0)
-Mettre l'attribut "content" dans "ui" mais bug pour les layers // Mettre sprite dans "ui" pour TileView mais bug aussi
 Click event fonctionne seulement sur le layer le plus élevé

@@ -8,15 +8,15 @@ define( [	"app" ], function( App ) {
     template: false,
     triggers: {
       'playerItemViewRender': 'player:itemView:render',
-      'playerItemViewAddChild': 'player:itemView:addchild'
+      'playerItemViewRenderPlayer': 'player:itemView:addchild'
     },
     ui: {
       playerSpriteSheet: "",
+      content: ""
     },
-    content: "",
 
   	initialize: function(options) {
-      this.content = new createjs.Container();
+      this.ui.content = new createjs.Container();
 	  },
 
 	  _loadSpriteSheet: function() {
@@ -52,9 +52,9 @@ define( [	"app" ], function( App ) {
       _sprite.alpha = this.model.get( 'alpha' );
       _sprite.visible = this.model.get( 'visible' );
 
-      this.content.addChild(_sprite);
+      this.ui.content.addChild(_sprite);
 
-      this.triggerMethod(this.triggers.playerItemViewAddChild, this);
+      this.triggerMethod(this.triggers.playerItemViewRenderPlayer, this);
 	  }
 
   });

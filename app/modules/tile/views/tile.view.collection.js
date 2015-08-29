@@ -12,8 +12,8 @@ define( [
       'tile:itemView:render': function (childItem) {
         this.triggerMethod(this.triggers.tileCollectionViewRender, childItem);
       },
-      'tile:itemView:addchild': function (childItem) {
-        this.triggerMethod(this.triggers.tileItemViewAddChild, childItem);
+      'tile:itemView:renderTile': function (childItem) {
+        this.triggerMethod(this.triggers.tileItemViewRenderTile, childItem);
       },
       'tile:itemView:click': function (childItem) {
         this.triggerMethod(this.triggers.tileCollectionViewClick, childItem);
@@ -27,7 +27,7 @@ define( [
     },
     triggers: {
       'tileCollectionViewRender': 'tile:collectionView:render',
-      'tileItemViewAddChild': 'tile:collectionView:addchild',
+      'tileItemViewRenderTile': 'tile:collectionView:renderTile',
       'tileCollectionViewClick': 'tile:collectionView:click',
       'tileCollectionViewMouseOver': 'tile:collectionView:mouseover',
       'tileCollectionViewMouseOut': 'tile:collectionView:mouseout',

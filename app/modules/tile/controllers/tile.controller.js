@@ -29,19 +29,19 @@ define( [ "app" ], function( App ) {
 
       this.Collection.setLayerIndex(_layerItemModel.get("index"));
 
-      var _this = this;
       this.Collection.fetch({
         dataType: 'json',
-        success: function(collection, response, options) {
+        success: _.bind(function(collection, response, options) {
           if( App.env == "dev") {
             console.info("[Tile.controller.js] JSON file load was successful");
           }
-          _this.onRenderView( _layerItemView, collection );
-        },
 
-        error: function(collection, response, options) {
+          this.onRenderView( _layerItemView, collection );
+        }, this),
+
+        error: _.bind(function(collection, response, options) {
           console.error('[Tile.controller.js] There was some error in loading and processing the JSON file' );
-        }
+        }, this)
       });
     },
 

@@ -23,20 +23,19 @@ define( [ "app" ], function( App ) {
 
 	  onLoadTiles: function(_gameController)
 	  {
-			var _this = this;
 	    this.Collection.fetch({
 	    	dataType: 'json',
-	    	success: function(collection, response, options) {
+	    	success: _.bind(function(collection, response, options) {
 	    		if( App.env == "dev") {
         		console.info("[Layer.controller.js] JSON file load was successful");
         	}
 
-        	_this.ViewCollection.render();
-		    },
+        	this.ViewCollection.render();
+		    }, this),
 
-		    error: function(collection, response, options) {
+		    error: _.bind(function(collection, response, options) {
 		      console.error('[Layer.controller.js] There was some error in loading and processing the JSON file' );
-		    }
+		    }, this)
 	    });
 
 	  }
