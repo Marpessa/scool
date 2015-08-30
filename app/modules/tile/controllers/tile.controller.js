@@ -9,6 +9,9 @@ define( [ "app" ], function( App ) {
     ViewCollection: "",
     nbCollectionTiles: 0,
 
+    appEvents: {
+      "app:handleComplete": "onLoadSpriteSheetView"
+    },
     collectionEvents: {
       "layer:collectionView:render": "onLoadTiles"
     },
@@ -21,13 +24,18 @@ define( [ "app" ], function( App ) {
       this.ViewCollection = new options.CollectionView({ Collection: this.Collection });
 
       // Listeners
+      Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
       Backbone.Marionette.bindEntityEvents(this, LayerModule.ControllerItem.ViewCollection, this.collectionEvents);
+    },
+
+    onLoadSpriteSheetView: function(App) {
+      this.ViewCollection.loadSpriteSheet(App);
     },
 
     onLoadTiles: function(_layerItemView) {
       var _layerItemModel = _layerItemView.model;
 
-      this.Collection.setLayerIndexFilex(_layerItemModel.get("index")); // TODO Bof...
+      this.Collection.setLayerIndexFilex(_layerItemModel.get("index")); // TODO Bof... Just use to load the good file with url function in collection
 
       // Merge collection view
       this.Collection.fetch({

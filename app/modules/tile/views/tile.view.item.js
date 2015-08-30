@@ -20,42 +20,14 @@ define( [ "app" ], function( App ) {
 
     initialize: function (options) {
       this.ui.content = new createjs.Container();
+      this._loadSpriteSheet(options.spriteSheetData);
     },
 
-    _loadSpriteSheet: function() {
-      // Load Tiles Sprites // TODO Change variables in code to move into model
-      var _data = {
-        images: [App.queue.getResult( "map_0_0" )],
-        frames: [
-          // x, y, width, height, imageIndex*, regX*, regY*
-          [100, 0, 100, 100],
-          [200, 0, 100, 100],
-          [300, 0, 100, 100],
-          [0, 100, 100, 100],
-          [100, 100, 100, 100],
-          [200, 100, 100, 100],
-          [300, 100, 100, 100],
-          [0, 200, 100, 100],
-          [100, 200, 100, 100]
-        ],
-        animations: {
-          "frame_0": 0,
-          "frame_1": 1,
-          "frame_2": 2,
-          "frame_3": 3,
-          "frame_4": 4,
-          "frame_5": 5,
-          "frame_6": 6,
-          "frame_7": 7,
-          "frame_8": 8
-        }
-      };
-      
-      this.ui.tileSpriteSheet = new createjs.SpriteSheet(_data);
+    _loadSpriteSheet: function(spriteSheetData) {
+      this.ui.tileSpriteSheet = new createjs.SpriteSheet(spriteSheetData);
     },
 
     render: function () {
-      this._loadSpriteSheet(); // TODO Move to initialize function
       this.renderTile();
       this.triggerMethod(this.triggers.tileItemViewRender, this);
     },

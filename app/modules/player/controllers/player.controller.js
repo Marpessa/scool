@@ -8,6 +8,9 @@ define( [
 
   return Backbone.Marionette.Object.extend({
 
+  	appEvents: {
+	    "app:handleComplete": "onLoadSpriteSheetView"
+	  },
     collectionEvents: {
 	    "tile:collectionView:click": "onMove",
 	    "tile:collectionView:render": "onRenderView"
@@ -28,7 +31,12 @@ define( [
       var TileModule = options.Modules.TileModule;
 
 	  	// Listeners
+	  	Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
 	  	Backbone.Marionette.bindEntityEvents(this, TileModule.ControllerItem.ViewCollection, this.collectionEvents);
+	  },
+
+	  onLoadSpriteSheetView: function(App) {
+	  	this.ViewItem.loadSpriteSheet(App);
 	  },
 
 	  onRenderView: function(_tileItemView) {

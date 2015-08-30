@@ -11,7 +11,7 @@ define( [
 
   var App = new Backbone.Marionette.Application();
   App.env = "dev";
-  App.version = "0.13";
+  App.version = "0.15";
 
   App.triggers = {
     'appHandleProgress': 'app:handleProgress',
@@ -27,8 +27,8 @@ define( [
     App.stage.enableMouseOver(30); // Enable Mouse over
 
     this.queue = new createjs.LoadQueue();
-    this.queue.on("complete", handleComplete, this);
     this.queue.on("progress", handleProgress, this);
+    this.queue.on("complete", handleComplete, this);
 
     this.options.LoaderModule.start();
     this.options.GameModule.start();

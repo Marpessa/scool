@@ -42,7 +42,6 @@ define( [ "app" ], function( App ) {
 		      console.error('[Layer.controller.js] There was some error in loading and processing the JSON file' );
 		    }, this)
 	    });
-
 	  }
 
   });

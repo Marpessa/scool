@@ -8,8 +8,8 @@ define( [ "app" ], function( App ) {
   	defaults : function() {
     	return  {
 								/*width: 640,
-						    height: 480,
-						    nbLayers : 6*/
+						    height: 480,*/
+						    nbLayers : 3 // TODO update with layer fetch collection listener
 							}
 		},
 
