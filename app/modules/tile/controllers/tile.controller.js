@@ -12,8 +12,8 @@ define( [ "app" ], function( App ) {
     appEvents: {
       "app:handleComplete": "onLoadSpriteSheetView"
     },
-    collectionEvents: {
-      "layer:collectionView:render": "onLoadTiles"
+    layerCollectionItemEvents: {
+      "layer:collection:itemView:render": "onLoadTiles"
     },
 
 		initialize: function(options) {
@@ -25,7 +25,7 @@ define( [ "app" ], function( App ) {
 
       // Listeners
       Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
-      Backbone.Marionette.bindEntityEvents(this, LayerModule.ControllerItem.ViewCollection, this.collectionEvents);
+      Backbone.Marionette.bindEntityEvents(this, LayerModule.ControllerItem.ViewCollection, this.layerCollectionItemEvents);
     },
 
     onLoadSpriteSheetView: function(App) {
@@ -53,7 +53,7 @@ define( [ "app" ], function( App ) {
 
           this.setModelTiles(_layerItemModel, collection);
 
-          // Render Tiles when all collections are loaded // TODO Parameters 2
+          // Render Tiles when all collections are loaded // TODO Parameters 3: Get collection.length with listeners / Reprendre le système d'initialisation du player
           if( this.nbCollectionTiles == 3 ) {
             this.ViewCollection.render();
           }

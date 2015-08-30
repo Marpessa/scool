@@ -19,7 +19,10 @@ define( [ "app" ], function( App ) {
 	              posY: 0,
                 alpha: 1,
                 visible: true,
-	              walkable: false
+	              walkable: false,
+                baseLayerIndex: 0, // Current layer
+                posPlayerTileIndexX: 2, // Default player X position on layer
+                posPlayerTileIndexY: 2, // Default player Y position on layer
             }
     },
 

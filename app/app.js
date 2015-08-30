@@ -11,11 +11,26 @@ define( [
 
   var App = new Backbone.Marionette.Application();
   App.env = "dev";
-  App.version = "0.15";
+  App.version = "0.19";
 
   App.triggers = {
     'appHandleProgress': 'app:handleProgress',
     'appHandleComplete': 'app:handleComplete'
+  };
+
+  App.loaderItemEvents = {
+    'loader:itemView:render': 'addChild',
+    'loader:itemView:destroy': 'removeChild'
+  };
+
+  App.tileCollectionItemEvents = {
+    'tile:collection:itemView:render': 'addChild',
+    'tile:collection:itemView:mouseover': 'stageUpdate',
+    'tile:collection:itemView:mouseout': 'stageUpdate'
+  };
+
+  App.playerItemEvents = {
+    'player:itemView:render': 'addChild'
   };
 
   var currentModule;
@@ -27,8 +42,8 @@ define( [
     App.stage.enableMouseOver(30); // Enable Mouse over
 
     this.queue = new createjs.LoadQueue();
-    this.queue.on("progress", handleProgress, this);
-    this.queue.on("complete", handleComplete, this);
+    this.queue.on("progress", App.handleProgress, this);
+    this.queue.on("complete", App.handleComplete, this);
 
     this.options.LoaderModule.start();
     this.options.GameModule.start();
@@ -43,66 +58,57 @@ define( [
 
     this.queue.loadManifest(_manifest, true, "/assets/imgs/");
 
-    var LoaderViewItem = this.options.LoaderModule.ControllerItem.ViewItem;
-    var GameViewItem = this.options.GameModule.ControllerItem.ViewItem;
-    var LayerViewCollection = this.options.LayerModule.ControllerItem.ViewCollection;
-    var TileViewCollection = this.options.TileModule.ControllerItem.ViewCollection;
-    var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
+    // Listeners :
 
-    // Listeners // TODO Use Backbone.Marionette.bindEntityEvents ?
-    // Loader
-    this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewRender, addChild);
-    this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewDestroy, removeChild);
-    // Tiles
-    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileItemViewRenderTile, addChild);
-    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
-    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOver, stageUpdate);
-    this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOut, stageUpdate);
-    // Player
-    this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRenderPlayer, addChild);
-    this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRender, stageUpdate);
-
-    function handleProgress(_this) {
-      if( App.env == "dev") {
-        console.info( "Loading..." );
-      }
-      
-      stageUpdate();
-      App.triggerMethod(App.triggers.appHandleProgress, App);
-    }
-
-    function handleComplete(_this) {
-      if( App.env == "dev") {
-        console.info( "Load Complete" );
-      }
-
-      App.options.LoaderModule.stop();
-
-      stageUpdate();
-      App.triggerMethod(App.triggers.appHandleComplete, App);
-    }
-
-    function addChild(elt) {
-      if( elt.ui && elt.ui.content ) {
-        App.stage.addChild(elt.ui.content);
-      } else {
-        console.error( "App > addChild >>> elt.ui.content is not defined" );
-      }
-    }
-
-    function removeChild(elt) {
-      if( elt.ui && elt.ui.content ) {
-        App.stage.removeChild(elt.ui.content);
-      } else {
-        console.log( elt );
-        console.error( "App > removeChild >>> elt.ui.content is not defined" );
-      }
-    }
-
-    function stageUpdate() {
-      App.stage.update();
-    }
+    // - Loader
+    Backbone.Marionette.bindEntityEvents(this, this.options.LoaderModule.ControllerItem.ViewItem, this.loaderItemEvents);
+    // - Tiles Events
+    Backbone.Marionette.bindEntityEvents(this, this.options.TileModule.ControllerItem.ViewCollection, this.tileCollectionItemEvents);
+    // - Player
+    Backbone.Marionette.bindEntityEvents(this, this.options.PlayerModule.ControllerItem.ViewItem, this.playerItemEvents);
   });
+
+  App.handleProgress = function(_this) {
+    if( this.env == "dev") {
+      console.info( "Loading..." );
+    }
+    
+    this.stageUpdate();
+    this.triggerMethod(this.triggers.appHandleProgress, this);
+  },
+
+  App.handleComplete = function(_this) {
+    if( this.env == "dev") {
+      console.info( "Load Complete" );
+    }
+
+    this.options.LoaderModule.stop();
+
+    this.stageUpdate();
+    this.triggerMethod(this.triggers.appHandleComplete, this);
+  },
+
+  App.addChild = function(elt) {
+    if( elt.ui && elt.ui.content ) {
+      this.stage.addChild(elt.ui.content);
+      this.stageUpdate();
+    } else {
+      console.error( "App > addChild >>> elt.ui.content is not defined" );
+    }
+  },
+
+  App.removeChild = function(elt) {
+    if( elt.ui && elt.ui.content ) {
+      this.stage.removeChild(elt.ui.content);
+    } else {
+      console.log( elt );
+      console.error( "App > removeChild >>> elt.ui.content is not defined" );
+    }
+  },
+
+  App.stageUpdate = function() {
+    this.stage.update();
+  },
 
   App.on("initialize:after", function(options) {
     if (!Backbone.history.started) {

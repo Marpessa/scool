@@ -8,29 +8,26 @@ define( [
 
   return Backbone.Marionette.CollectionView.extend({
 
+    triggers: {
+      'tileCollectionItemViewRender': 'tile:collection:itemView:render',
+      'tileCollectionItemViewClick': 'tile:collection:itemView:click',
+      'tileCollectionItemViewMouseOver': 'tile:collection:itemView:mouseover',
+      'tileCollectionItemViewMouseOut': 'tile:collection:itemView:mouseout',
+      'tileCollectionViewRender': 'tile:collectionView:render',
+    },
     childEvents: {
       'tile:itemView:render': function (childItem) {
-        this.triggerMethod(this.triggers.tileCollectionViewRender, childItem);
-      },
-      'tile:itemView:renderTile': function (childItem) {
-        this.triggerMethod(this.triggers.tileItemViewRenderTile, childItem);
+        this.triggerMethod(this.triggers.tileCollectionItemViewRender, childItem);
       },
       'tile:itemView:click': function (childItem) {
-        this.triggerMethod(this.triggers.tileCollectionViewClick, childItem);
+        this.triggerMethod(this.triggers.tileCollectionItemViewClick, childItem);
       },
       'tile:itemView:mouseover': function (childItem) {
-        this.triggerMethod(this.triggers.tileCollectionViewMouseOver, childItem);
+        this.triggerMethod(this.triggers.tileCollectionItemViewMouseOver, childItem);
       },
       'tile:itemView:mouseout': function (childItem) {
-        this.triggerMethod(this.triggers.tileCollectionViewMouseOut, childItem);
+        this.triggerMethod(this.triggers.tileCollectionItemViewMouseOut, childItem);
       }
-    },
-    triggers: {
-      'tileCollectionViewRender': 'tile:collectionView:render',
-      'tileItemViewRenderTile': 'tile:collectionView:renderTile',
-      'tileCollectionViewClick': 'tile:collectionView:click',
-      'tileCollectionViewMouseOver': 'tile:collectionView:mouseover',
-      'tileCollectionViewMouseOut': 'tile:collectionView:mouseout',
     },
     childView: ItemView,
     childViewOptions: {
@@ -80,6 +77,7 @@ define( [
     },
 
   	onRender: function() {
+      this.triggerMethod(this.triggers.tileCollectionViewRender, this);
   	}
 
   });

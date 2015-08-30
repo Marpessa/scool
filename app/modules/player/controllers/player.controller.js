@@ -9,11 +9,14 @@ define( [
   return Backbone.Marionette.Object.extend({
 
   	appEvents: {
-	    "app:handleComplete": "onLoadSpriteSheetView"
+	    'app:handleComplete': 'onLoadSpriteSheetView'
 	  },
-    collectionEvents: {
-	    "tile:collectionView:click": "onMove",
-	    "tile:collectionView:render": "onRenderView"
+	  tileCollectionEvents: {
+	  	'tile:collectionView:render': 'onRenderView'
+	  },
+    tileCollectionItemEvents: {
+	    'tile:collection:itemView:render': 'onSetPlayer',
+	    'tile:collection:itemView:click': 'onMove'
 	  },
   	ViewItem: "",
     finder: "",
@@ -32,28 +35,35 @@ define( [
 
 	  	// Listeners
 	  	Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
-	  	Backbone.Marionette.bindEntityEvents(this, TileModule.ControllerItem.ViewCollection, this.collectionEvents);
+	  	Backbone.Marionette.bindEntityEvents(this, TileModule.ControllerItem.ViewCollection, this.tileCollectionItemEvents);
+	  	Backbone.Marionette.bindEntityEvents(this, TileModule.ControllerItem.ViewCollection, this.tileCollectionEvents);
 	  },
 
 	  onLoadSpriteSheetView: function(App) {
 	  	this.ViewItem.loadSpriteSheet(App);
 	  },
 
-	  onRenderView: function(_tileItemView) {
-	  	var _tileItemModel = _tileItemView.model;
-	  	if(_tileItemModel.get( 'layerIndex' ) == this.ViewItem.model.get('baseLayerIndex')
-	  		&& _tileItemModel.get( 'indexX' ) == this.ViewItem.model.get('baseTileIndexX')
-	  		&&  _tileItemModel.get( 'indexY' ) == this.ViewItem.model.get('baseTileIndexY')) {
+	  onSetPlayer: function(_tileItemView) {
+			var _tileItemModel = _tileItemView.model;
+	  	if(_tileItemModel.get( 'layerIndex' ) == _tileItemModel.get('baseLayerIndex')
+	  		&& _tileItemModel.get( 'indexX' ) == _tileItemModel.get('posPlayerTileIndexY')
+	  		&&  _tileItemModel.get( 'indexY' ) == _tileItemModel.get('posPlayerTileIndexY')) {
 
 	  		this.ViewItem.model.set('posX', _tileItemModel.get( 'posX' ) + this.ViewItem.model.get('decX'));
 	  		this.ViewItem.model.set('posY', _tileItemModel.get( 'posY' ) - this.ViewItem.model.get('decY'));
-		  	this.ViewItem.render();
 	  	}
 	  },
 
-	  onMove: function() {
-	  	console.info( "Player >> Move" );
-	  }
+	  onRenderView: function(_tileItemView) {
+	  	this.ViewItem.render();
+	  },
+
+	  onMove: function(_tileItemView) {
+	  	if( _tileItemView.model.get('walkable') ) {
+	  		console.info( "Player >> Move : " + "[" + _tileItemView.model.get('posX') + " - " + _tileItemView.model.get('posY') + "]" );
+	  	}
+	  },
+
 
   });
 

@@ -11,3 +11,5 @@ La vue instancie TriggerMethod et ce sont les controlleurs des autres modules qu
 
 TODO :
 Rechercher tous les "TODO" restants dans le projet
+Mettre les commentaires sur les fonctions écoutés afin de s'y repérer
+Mettre dans la barre de chargement, le chargement des fichiers json

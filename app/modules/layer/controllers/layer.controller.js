@@ -8,7 +8,7 @@ define( [ "app" ], function( App ) {
   	Collection: "",
   	ViewCollection: "",
 
-  	itemEvents: {
+  	gameItemEvents: {
 	    "game:itemView:render": "onLoadTiles"
 	  },
 
@@ -18,7 +18,7 @@ define( [ "app" ], function( App ) {
 	    this.Collection = new options.Collection();
 	    this.ViewCollection = new options.CollectionView({ Collection: this.Collection });
 	    // Listeners
-	    Backbone.Marionette.bindEntityEvents(this, GameModule.ControllerItem.ViewItem, this.itemEvents);
+	    Backbone.Marionette.bindEntityEvents(this, GameModule.ControllerItem.ViewItem, this.gameItemEvents);
 	  },
 
 	  onLoadTiles: function(_gameController)

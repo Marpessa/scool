@@ -7,8 +7,7 @@ define( [	"app" ], function( App ) {
 
     template: false,
     triggers: {
-      'playerItemViewRender': 'player:itemView:render',
-      'playerItemViewRenderPlayer': 'player:itemView:addchild'
+      'playerItemViewRender': 'player:itemView:render'
     },
     ui: {
       playerSpriteSheet: "",
@@ -44,8 +43,6 @@ define( [	"app" ], function( App ) {
       _sprite.visible = this.model.get( 'visible' );
 
       this.ui.content.addChild(_sprite);
-
-      this.triggerMethod(this.triggers.playerItemViewRenderPlayer, this);
 	  }
 
   });

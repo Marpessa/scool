@@ -8,7 +8,6 @@ define( [ "app" ], function( App ) {
     template: false,
     triggers: {
       'tileItemViewRender': 'tile:itemView:render',
-      'tileItemViewRenderTile': 'tile:itemView:renderTile',
       'tileItemViewClick': 'tile:itemView:click',
       'tileItemViewMouseOver': 'tile:itemView:mouseover',
       'tileItemViewMouseOut': 'tile:itemView:mouseout'
@@ -71,20 +70,22 @@ define( [ "app" ], function( App ) {
           }
         }
       }
-
-
-      this.triggerMethod(this.triggers.tileItemViewRenderTile, this);
 	  },
 
     click: function (event, _sprite) {
-      console.info( "Click : [" + _sprite.x + " - " + _sprite.y + "]" );
       this.triggerMethod(this.triggers.tileItemViewClick, this);
     },
 
     mouseover: function(event, _sprite) {
-      _sprite.filters = [
-        new createjs.ColorFilter(0, 0, 0, 1, 0, 155, 0)
-      ];
+      if( this.model.get( 'walkable' ) ) {
+        _sprite.filters = [
+          new createjs.ColorFilter(0, 0, 0, 1, 0, 155, 0)
+        ];
+      } else {
+        _sprite.filters = [
+          new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0)
+        ];
+      }
       _sprite.cache(0,0,100,100);
 
       this.triggerMethod(this.triggers.tileItemViewMouseOver, this);

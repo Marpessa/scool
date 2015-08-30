@@ -7,9 +7,6 @@ define( [ "app" ], function( App ) {
 
   	defaults : function() {
     	return  {
-    		        baseLayerIndex: 0,
-    		        baseTileIndexX: 2,
-    		        baseTileIndexY: 2,
     		        frameId: 0,
 								width: 100,
 						    height: 50,
