@@ -10,7 +10,6 @@ define( [ "app" ], function( App ) {
   	defaults : function() {
       return {
                 layerIndex: 0,
-                gameTileSpriteSheet: "",
                 frameId: 0,
                 width: 0,
                 height: 0,

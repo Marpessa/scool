@@ -7,6 +7,7 @@ define( [ "app" ], function( App ) {
 
     Collection: "",
     ViewCollection: "",
+    nbCollectionTiles: 0,
 
     collectionEvents: {
       "layer:collectionView:render": "onLoadTiles"
@@ -24,19 +25,30 @@ define( [ "app" ], function( App ) {
     },
 
     onLoadTiles: function(_layerItemView) {
-
       var _layerItemModel = _layerItemView.model;
 
-      this.Collection.setLayerIndex(_layerItemModel.get("index"));
+      this.Collection.setLayerIndexFilex(_layerItemModel.get("index")); // TODO Bof...
 
+      // Merge collection view
       this.Collection.fetch({
+        async: true,
+        add: true,
+        update: true,
+        reset: false,
+        remove: false,
         dataType: 'json',
         success: _.bind(function(collection, response, options) {
           if( App.env == "dev") {
             console.info("[Tile.controller.js] JSON file load was successful");
           }
+          this.nbCollectionTiles++;
 
-          this.onRenderView( _layerItemView, collection );
+          this.setModelTiles(_layerItemModel, collection);
+
+          // Render Tiles when all collections are loaded // TODO Parameters 2
+          if( this.nbCollectionTiles == 3 ) {
+            this.ViewCollection.render();
+          }
         }, this),
 
         error: _.bind(function(collection, response, options) {
@@ -45,19 +57,17 @@ define( [ "app" ], function( App ) {
       });
     },
 
-    onRenderView: function(_layerItemView, collection) {
-      // TODO Must be do with listener or directly in tileItemView ?
-      var _layerItemModel = _layerItemView.model;
-
-
+    setModelTiles: function(_layerItemModel, collection) {
       var _nbTilesByRow = _layerItemModel.get('nbTilesByRow');
       var _nbTiles = collection.length;
       var _nbRows = _nbTiles/_nbTilesByRow;
       var _nbCols = _nbTiles/_nbTilesByRow;
 
-      var i, _indexX, _indexY = 0;
+       // Current Start Tile of collection / Index of first Tile // Indeed, several collections are merge, not set tile of previous collection
+      var i = (this.nbCollectionTiles-1)*(_nbTilesByRow*_nbTilesByRow);
+      var _indexX, _indexY = 0;
 
-      for(i = 0; i < _nbTiles; i++) {
+      for(i; i<_nbTiles; i++) {
         var _indexX = i%_nbTilesByRow;
         if(i != 0 && _indexX == 0)
         {
@@ -70,21 +80,13 @@ define( [ "app" ], function( App ) {
         var _posX = (_indexY-_indexX) * _width/2 + _layerItemModel.get( 'posX' );
         var _posY = (_indexX+_indexY) * _height/2 + _layerItemModel.get( 'posY' ) + _layerItemModel.get( 'posZ' );
 
-        collection.layerIndex = _layerItemModel.get("index"); // TODO Fixed Bug but strange...
-
         collection.models[i].set('indexX', _indexX);
         collection.models[i].set('indexY', _indexY);
         collection.models[i].set('width', _width);
         collection.models[i].set('height', _height);
         collection.models[i].set('posX', _posX);
         collection.models[i].set('posY', _posY);
-        collection.models[i].set('layerIndex', _layerItemModel.get("index"));
-
-        // All tiles loaded / Render View
-        if( i == _nbTiles-1 ) {
-          this.ViewCollection.render();
-        }
-
+        collection.models[i].set('layerIndex', _layerItemModel.get("index") );
       }
     }
 

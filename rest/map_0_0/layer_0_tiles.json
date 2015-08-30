@@ -98,5 +98,5 @@
 	{ "frameId": "0", "walkable": true, "alpha": "1", "visible": true },
 	{ "frameId": "0", "walkable": true, "alpha": "1", "visible": true },
 	{ "frameId": "0", "walkable": true, "alpha": "1", "visible": true },
-	{ "frameId": "0", "walkable": "false", "alpha": "1", "visible": true }
+	{ "frameId": "0", "walkable": false, "alpha": "1", "visible": true }
 ]

@@ -24,12 +24,17 @@ define( [ "app" ], function( App ) {
 	  onLoadTiles: function(_gameController)
 	  {
 	    this.Collection.fetch({
+	    	async: true,
+        add: true,
+        update: true,
+        reset: false,
+        remove: false,
 	    	dataType: 'json',
 	    	success: _.bind(function(collection, response, options) {
 	    		if( App.env == "dev") {
         		console.info("[Layer.controller.js] JSON file load was successful");
         	}
-
+        	
         	this.ViewCollection.render();
 		    }, this),
 

@@ -9,14 +9,15 @@ define( [
   return Backbone.Collection.extend({
 
   	model: Model,
-  	layerIndex: 0,
+  	layerIndexFile: "0",
+    mapIndexFile: "0_0",  // TODO ID Map to change
 
   	url: function () {
-      return "http://dev.scool.com/rest/map_0_0/layer_" + this.layerIndex + "_tiles.json?v=" + App.version; // TODO ID Map to change
+      return "http://dev.scool.com/rest/map_" + this.mapIndexFile + "/layer_" + this.layerIndexFile + "_tiles.json?v=" + App.version;
     },
 
-  	setLayerIndex: function(layerIndex) {
-  		this.layerIndex = layerIndex;
+  	setLayerIndexFilex: function(layerIndexFile) {
+  		this.layerIndexFile = layerIndexFile;
   	}
 
   });

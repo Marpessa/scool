@@ -11,7 +11,7 @@ define( [
 
   var App = new Backbone.Marionette.Application();
   App.env = "dev";
-  App.version = "0.1";
+  App.version = "0.13";
 
   App.triggers = {
     'appHandleProgress': 'app:handleProgress',
@@ -50,13 +50,15 @@ define( [
     var PlayerViewItem = this.options.PlayerModule.ControllerItem.ViewItem;
 
     // Listeners // TODO Use Backbone.Marionette.bindEntityEvents ?
+    // Loader
     this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewRender, addChild);
     this.listenTo(LoaderViewItem, LoaderViewItem.triggers.loaderItemViewDestroy, removeChild);
-    // this.listenTo(LayerViewCollection, LayerViewCollection.triggers.layerCollectionViewRender, addChild);
+    // Tiles
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileItemViewRenderTile, addChild);
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewRender, stageUpdate); // TODO // To Optimize / Loading too long
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOver, stageUpdate);
     this.listenTo(TileViewCollection, TileViewCollection.triggers.tileCollectionViewMouseOut, stageUpdate);
+    // Player
     this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRenderPlayer, addChild);
     this.listenTo(PlayerViewItem, PlayerViewItem.triggers.playerItemViewRender, stageUpdate);
 

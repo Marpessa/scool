@@ -35,7 +35,6 @@ define( [
     childView: ItemView,
     collection: "",
 
-
   	initialize: function(options) {
 	    this.collection = options.Collection;
 	  },

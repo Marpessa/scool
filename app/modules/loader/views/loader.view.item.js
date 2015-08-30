@@ -45,7 +45,7 @@ define( [ "app" ], function( App ) {
 
     render: function (App) {
       var progressPercent =  Math.ceil(App.queue.progress*100);
-      this.ui.loadProgressLabel.text = "Chargement... " + progressPercent + "%";
+      this.ui.loadProgressLabel.text = "Chargement des images... " + progressPercent + "%";
 
       var progressPoint = App.queue.progress * this.model.get('progressBarMaxWidth');
 
@@ -63,7 +63,6 @@ define( [ "app" ], function( App ) {
 
     destroy: function(App) {
       this.triggerMethod(this.triggers.loaderItemViewDestroy, this);
-      console.info("destroy");
     }
 
   });

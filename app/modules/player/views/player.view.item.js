@@ -17,10 +17,10 @@ define( [	"app" ], function( App ) {
 
   	initialize: function(options) {
       this.ui.content = new createjs.Container();
-	  },
+    },
 
-	  _loadSpriteSheet: function() {
-	  	// Load Player Sprites // TODO Change variables in code to move into model
+    _loadSpriteSheet: function() {
+      // Load Player Sprites // TODO Change variables in code to move into model
       var _data = {
         images: [App.queue.getResult( "player" )],
         frames: [
@@ -35,11 +35,11 @@ define( [	"app" ], function( App ) {
       };
       
       this.ui.playerSpriteSheet = new createjs.SpriteSheet(_data);
-	  },
+    },
 
-	  render: function () {
-	  	this._loadSpriteSheet();
-	  	this.renderPlayer();
+    render: function () {
+      this._loadSpriteSheet(); // TODO Move to initialize function
+      this.renderPlayer();
       this.triggerMethod(this.triggers.playerItemViewRender, this);
     },
 

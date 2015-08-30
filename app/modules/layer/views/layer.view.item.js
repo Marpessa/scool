@@ -9,7 +9,7 @@ define( [ "app" ], function( App ) {
     triggers: {
       'layerItemViewRender': 'layer:itemView:render'
     },
-    ui: {
+    ui: { // Empty not necessary ui for the moment
     },
 
   	initialize: function(options) {

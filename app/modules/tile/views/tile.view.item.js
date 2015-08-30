@@ -55,9 +55,8 @@ define( [ "app" ], function( App ) {
     },
 
     render: function () {
-      this._loadSpriteSheet();
+      this._loadSpriteSheet(); // TODO Move to initialize function
       this.renderTile();
-
       this.triggerMethod(this.triggers.tileItemViewRender, this);
     },
 
@@ -90,7 +89,7 @@ define( [ "app" ], function( App ) {
 
       if( App.env == "dev") {
         if( this.model.get( 'visible' ) == true ) {
-          var text = new createjs.Text("[" + this.model.get( 'posX' ) + " - " + this.model.get( 'posY' ) + "]", "12px Arial", "#000");
+          var text = new createjs.Text("[" + this.model.get( 'layerIndex' ) + "/" + this.model.get( 'posX' ) + " - " + this.model.get( 'posY' ) + "]", "12px Arial", "#000");
           text.x = this.model.get( 'posX' ) + this.model.get( 'width' )/3;
           text.y = this.model.get( 'posY' ) + this.model.get( 'height' );
           text.textBaseline = "alphabetic";

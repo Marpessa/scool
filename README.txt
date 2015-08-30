@@ -10,6 +10,4 @@ La vue instancie TriggerMethod et ce sont les controlleurs des autres modules qu
 
 
 TODO :
-
-GROS BUG : Des tiles sont chargés à partir de layer qui n'existe pas. Icompréhensible. (LayerIndex : 0; Tile Pos X et Y : 0)
-Click event fonctionne seulement sur le layer le plus élevé
+Rechercher tous les "TODO" restants dans le projet
