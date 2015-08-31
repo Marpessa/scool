@@ -9,7 +9,7 @@ define( [
   return Backbone.Collection.extend({
 
   	model: Model,
-  	mapIndexFile: "0_0",  // TODO ID Map to change
+  	mapIndexFile: "0_0",  // TODO ID Map to change // Create Map module abnd listen this
 
   	url: function () {
       return "http://dev.scool.com/rest/map_" + this.mapIndexFile + "/layers.json?v=" + App.version;

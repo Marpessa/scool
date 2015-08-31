@@ -17,6 +17,7 @@ define( [ "app" ], function( App ) {
 
 	    this.Collection = new options.Collection();
 	    this.ViewCollection = new options.CollectionView({ Collection: this.Collection });
+	    
 	    // Listeners
 	    Backbone.Marionette.bindEntityEvents(this, GameModule.ControllerItem.ViewItem, this.gameItemEvents);
 	  },

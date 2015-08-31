@@ -9,7 +9,6 @@ define( [ "app" ], function( App ) {
     	return  {
 								/*width: 640,
 						    height: 480,*/
-						    nbLayers : 3 // TODO update with layer fetch collection listener
 							}
 		},
 

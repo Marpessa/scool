@@ -7,13 +7,17 @@ define( [ "app" ], function( App ) {
 
     Collection: "",
     ViewCollection: "",
-    nbCollectionTiles: 0,
+    nbLayers: 0,
+    nbLayersLoaded: 0,
 
     appEvents: {
-      "app:handleComplete": "onLoadSpriteSheetView"
+      'app:handleComplete': 'onLoadSpriteSheetView'
     },
     layerCollectionItemEvents: {
-      "layer:collection:itemView:render": "onLoadTiles"
+      'layer:collection:itemView:render': 'onLoadTiles'
+    },
+    layerCollectionEvents: {
+      'layer:collection:render': 'onSetNbLayers'
     },
 
 		initialize: function(options) {
@@ -26,6 +30,11 @@ define( [ "app" ], function( App ) {
       // Listeners
       Backbone.Marionette.bindEntityEvents(this, App, this.appEvents);
       Backbone.Marionette.bindEntityEvents(this, LayerModule.ControllerItem.ViewCollection, this.layerCollectionItemEvents);
+      Backbone.Marionette.bindEntityEvents(this, LayerModule.ControllerItem.ViewCollection, this.layerCollectionEvents);
+    },
+
+    onSetNbLayers: function(_layerView) {
+      this.nbLayers = _layerView.collection.length;
     },
 
     onLoadSpriteSheetView: function(App) {
@@ -49,12 +58,11 @@ define( [ "app" ], function( App ) {
           if( App.env == "dev") {
             console.info("[Tile.controller.js] JSON file load was successful");
           }
-          this.nbCollectionTiles++;
+          this.nbLayersLoaded++;
 
           this.setModelTiles(_layerItemModel, collection);
 
-          // Render Tiles when all collections are loaded // TODO Parameters 3: Get collection.length with listeners / Reprendre le système d'initialisation du player
-          if( this.nbCollectionTiles == 3 ) {
+          if( this.nbLayersLoaded == this.nbLayers ) {
             this.ViewCollection.render();
           }
         }, this),
@@ -72,7 +80,7 @@ define( [ "app" ], function( App ) {
       var _nbCols = _nbTiles/_nbTilesByRow;
 
        // Current Start Tile of collection / Index of first Tile // Indeed, several collections are merge, not set tile of previous collection
-      var i = (this.nbCollectionTiles-1)*(_nbTilesByRow*_nbTilesByRow);
+      var i = (this.nbLayersLoaded-1)*(_nbTilesByRow*_nbTilesByRow);
       var _indexX, _indexY = 0;
 
       for(i; i<_nbTiles; i++) {

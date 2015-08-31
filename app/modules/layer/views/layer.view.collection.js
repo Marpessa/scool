@@ -9,7 +9,8 @@ define( [
   return Backbone.Marionette.CollectionView.extend({
 
     triggers: {
-      'layerCollectionItemViewRender': 'layer:collection:itemView:render'
+      'layerCollectionItemViewRender': 'layer:collection:itemView:render',
+      'layerCollectionViewRender': 'layer:collection:render'
     },
     childEvents: {
       'layer:itemView:render': function (childItem) {
@@ -29,6 +30,7 @@ define( [
     },
 
   	onRender: function() {
+      this.triggerMethod(this.triggers.layerCollectionViewRender, this);
   	}
 
   });

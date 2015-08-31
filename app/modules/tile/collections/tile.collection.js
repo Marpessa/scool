@@ -10,7 +10,7 @@ define( [
 
   	model: Model,
   	layerIndexFile: "0",
-    mapIndexFile: "0_0",  // TODO ID Map to change
+    mapIndexFile: "0_0",  // TODO ID Map to change // Create Map module abnd listen this
 
   	url: function () {
       return "http://dev.scool.com/rest/map_" + this.mapIndexFile + "/layer_" + this.layerIndexFile + "_tiles.json?v=" + App.version;
