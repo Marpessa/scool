@@ -10,6 +10,8 @@ define( [ "app" ], function( App ) {
     		        frameId: 0,
 								width: 100,
 						    height: 50,
+						    indexX: 0,
+						    indexY: 0,
 						    posX: 0,
 	              posY: 0,
 	              decX: 5,
